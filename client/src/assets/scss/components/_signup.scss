@@ -1,0 +1,383 @@
+.signup-container {
+  margin-top: 5rem;
+  width: auto;
+  height: auto;
+  border-radius: .3rem;
+  box-shadow: 0 0 2rem $color-grey-dark-2;
+  background-color: $color-white;
+  background-image: linear-gradient(110deg, rgba($color-white, 0.5) 50%, rgba($color-white, 0.9) 50%), url('./../images/artist-background-2.jpg');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 5rem;
+
+  
+  @include respond(tab-port) {
+    background-image: none;
+  }
+
+  .signup-form {
+    @include flexRowCenter;
+    
+    @include respond(tab-port) {
+      @include flexColumnCenter;
+    }
+
+    & > div {
+      width: 45rem;
+      height: 55rem;
+      @include flexColumnCenter;
+
+      @include respond(tab-port) {
+        height: auto;
+      }
+    }
+  
+    .signup-left {
+
+      @include respond(tab-port) {
+        height: auto;
+        margin-top: 4rem;
+      }
+      
+      & > div:not(.signup-profile-pic) {
+        width: 100%;
+        margin: 1.5rem 0rem;
+        padding: 0rem 7rem;
+        
+        @include flexRowCenter;
+        
+        & > div {
+          position: relative;
+          height: 5rem;
+          width: 100%;
+
+          @include flexRowCenter;
+          justify-content: flex-start;
+
+          span.password-strength {
+            position: absolute;
+            right: 1rem;
+            margin-top: -.2rem;
+
+            span {
+              font-size: 1.2rem;
+              padding: .5rem .7rem;
+              border-radius: .4rem;
+              color: white;
+              opacity: .9;
+              letter-spacing: .8px;
+
+              &.text-green {
+                background-color: $color-green
+              }
+
+              &.text-orange {
+                background-color: $color-orange
+              }
+
+              &.text-red {
+                background-color: $color-red
+              }
+            }
+          }
+
+          svg {
+            position: absolute;
+            fill: $color-grey-light-2;
+            width: 4rem;
+            height: 1.4rem;
+            margin-top: -1px;
+          }          
+
+          & > input {
+            @include defaultInput;
+            border-radius: 3px;
+            padding-left: 3.5rem;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            color: $color-grey-dark-3;
+            padding-top: .2rem;
+            font-size: 1.3rem;
+            letter-spacing: .4px;
+            background-color: rgba($color-white, 0.8);
+            border-bottom: 3px solid transparent;
+            
+            @include respond(tab-port) {
+              box-shadow: 0 0 2rem $color-white-3;
+            }
+
+            &::placeholder {
+              letter-spacing: .7px;
+              color: $color-grey-dark-2;
+            }
+            
+            &:focus {
+              border-bottom: 3px solid $color-blue-dark;
+            }
+          }
+        }
+          
+        &.signup-password-tip {
+          margin-top: 0rem;
+          line-height: 1.6rem;
+          font-size: 1.2rem;
+          color: $color-grey-dark-3;
+
+          & > p {
+            padding: 0rem .2rem;
+          }
+        }
+      }
+
+      & > div.signup-error {
+        width: 100%;
+        margin: 0rem;
+        
+        p {
+          padding: .3rem;
+          padding-left: .5rem;
+          width: 100%;
+          font-size: 1.2rem;
+          line-height: 1.2rem;
+          color: $color-red;
+          border-radius: .2rem;
+          font-weight: 600;
+          letter-spacing: .6px;
+        }
+      }
+
+      .signup-profile-pic {
+        @include flexRowCenter;
+        margin-bottom: 2rem;
+        border-radius: 50%;
+        box-shadow: 0rem -0rem 1.5rem $color-white-3;
+
+        label.choose-photo {
+          position: relative;
+          width: 16rem;
+          height: 16rem;
+          border-radius: 50%;
+          overflow: hidden;
+          
+          @include flexRowCenter;
+
+          &-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: .4s;
+            cursor: pointer;
+            color: $color-white;
+            text-align: center;
+            background-color: $color-white;
+            opacity: 0.3;
+            
+            @include flexRowCenter;
+            
+            &:hover {
+              opacity: 0.9;
+              color: $color-grey-dark-1;
+              width: 102%;
+              height: 102%;
+            }
+          }
+          
+          img.signup-image {
+            height: 102%;
+          }
+        }
+      }
+    }
+
+    .signup-right {
+      @include flexColumnCenter;
+
+      & > div.signup-error {
+        width: 100%;
+        margin: 0rem;
+        
+        p {
+          text-align: center;
+          padding: .3rem;
+          width: 100%;
+          font-size: 1.2rem;
+          line-height: 1.2rem;
+          color: $color-red;
+          border-radius: .2rem;
+          font-weight: 600;
+          letter-spacing: .6px;
+        }
+      }
+
+      & > div {
+        width: 100%;
+        margin: 1.5rem 0rem;
+        padding: 0rem 6.3rem;
+
+        &:first-child {
+          margin-top: 4rem;
+              
+          @include respond(tab-port) {
+            margin-top: 1rem;
+          }
+        }
+
+        &.signup-button {
+          text-align: center;
+          margin-top: 3rem;
+
+          button {
+            letter-spacing: .6px;
+            padding: 1.5rem 5rem;
+            
+            &:active {
+              padding: 1.5rem 4.9rem;
+            }
+          }
+        }
+
+        &.signup-redirect {
+          text-align: center;
+          margin-top: 1.5rem;
+          @include flexRowCenter;
+
+          a {
+            text-decoration: none;
+            color: $color-blue-dark;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        & > div.signup-singing-style-heading,
+        & > div.signup-singing-level-heading {
+          p {
+            margin-bottom: 2rem;
+            text-align: center;
+            color: $color-grey-light-2;
+            font-size: 1.8rem;
+            letter-spacing: .7px;
+            word-spacing: 2px;
+          }
+        }
+
+        & > div.signup-singing-style-labels,
+        & > div.signup-singing-level-labels {
+          @include flexRowCenter;
+          justify-content: space-between;
+        }
+
+        & > div.signup-singing-style-labels {
+        
+          & > label {
+            @include flexRowCenter;
+            cursor: pointer;
+            
+            & > input {
+              display: none;
+
+              &:checked + label span{
+                border: 2px solid $color-blue-dark;
+                
+                svg {
+                  background-color: $color-blue-dark;
+                  width: 2rem;
+                  height: 2rem;
+                  padding: 2px;
+                  fill: $color-white;
+                }
+              }
+            }
+            
+            & > label {
+              cursor: pointer;
+              display: flex;
+              
+              span {
+                @include flexRowCenter;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                border: 2px solid $color-grey-light-1;
+                transition: .4s;
+                background-color: $color-white;
+                
+                svg {
+                  border-radius: 50%;
+                  transition: .4s;
+                  width: 0rem;
+                  height: 0rem;
+                }
+              }
+            }
+            
+            & > span {
+              margin-left: .5rem;
+              font-size: 1.3rem;
+              letter-spacing: .7px;
+              color: $color-grey-dark-1
+            }
+          }
+        }
+
+        & > div.signup-singing-level-labels {
+        
+          & > label {
+            @include flexRowCenter;
+            cursor: pointer;
+            
+            & > input {
+              display: none;
+              
+              &:checked + label > span{
+                
+                & > span {
+                  width: 50%;
+                  height: 50%;
+                }
+                
+              }
+            }
+            
+            & > label {
+              cursor: pointer;
+              display: flex;
+              
+              & > span {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                border: 2px solid $color-blue-dark;
+                transition: .4s;
+                background-color: $color-white;
+
+                @include flexRowCenter;
+
+                & > span {
+                  transition: .3s;
+                  cursor: pointer;
+                  border-radius: 50%;
+                  width: 0px;
+                  height: 0px;
+                  background-color: $color-blue-dark;
+                }
+              }
+            }
+            
+            & > span {
+              margin-left: .5rem;
+              font-size: 1.3rem;
+              letter-spacing: .5px;
+              color: $color-grey-dark-1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

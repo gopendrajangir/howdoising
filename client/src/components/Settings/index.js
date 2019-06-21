@@ -1,0 +1,9 @@
+import React from 'react';
+
+export default () => {
+  return (
+    <div className="settings-container">
+      <h1>Settings</h1>
+    </div>
+  );
+}

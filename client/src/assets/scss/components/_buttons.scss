@@ -1,0 +1,17 @@
+.primary-button {
+  @include defaultInput;
+  padding: 1.5rem 4rem;
+  background-color: $color-blue-dark;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 10rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($color-blue-dark, 0.7);
+  }
+  
+  &:active {
+    background-color: $color-blue-dark;
+  }
+}
