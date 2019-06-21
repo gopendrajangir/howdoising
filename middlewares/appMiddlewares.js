@@ -10,6 +10,7 @@ const MS = require('express-mongoose-store')(session, mongoose);
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
+const express = require('express');
 
 const mongooseStore = new MS({
   modelName: 'session'
