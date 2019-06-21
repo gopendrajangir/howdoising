@@ -1,7 +1,10 @@
 {
   "name": "howdoising",
   "version": "1.0.0",
-  "description": "",
+  "description": "an app for singers",
+  "engines": {
+    "node": "8.11.1"
+  },
   "main": "index.js",
   "scripts": {
     "client-install": "npm install --prefix client",
