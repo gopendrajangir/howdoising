@@ -6,7 +6,7 @@ const io = require('socket.io')(server);
 const mongoose = require('mongoose');
 const mongoURI = require('../config/keys').mongoURI;
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true });
 const db = mongoose.connection;
