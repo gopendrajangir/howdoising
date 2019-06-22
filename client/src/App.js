@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Navigation from 'containers/Navigation';
+import Logout from 'containers/Logout';
 
 import Home from 'components/Home';
 import Signup from 'components/Signup';
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile" exact component={Profile} />
           <Route path="/record" exact component={Record} />
           <Route path="/settings" exact component={Settings} />
+          <Route path="/logout" exact component={Logout} />
         </Switch>
       </div>
     </BrowserRouter>

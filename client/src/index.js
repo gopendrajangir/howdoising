@@ -8,14 +8,6 @@ import reducers from 'reducers';
 import 'assets/scss/main.scss';
 import App from './App';
 
-fetch('/apis/connector')
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 function saveToLocalStorage(state) {
   try {
     const serializedState = JSON.stringify(state);

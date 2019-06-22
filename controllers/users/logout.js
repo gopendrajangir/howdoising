@@ -7,14 +7,16 @@ module.exports = (req, res) => {
   const sessionID = req.sessionID;
   const userId = req.user;
 
-  User.findOne({ _id: mongoose.Types.ObjectId(userId)}, (err, user) => {
+  User.findOne({ _id: ObjectId(userId)}, (err, user) => {
     if(err) {
       console.log("Error in user find one in req session destory at logout route", err);
       return res.status(500).send("Internal Server Error");
     }
     if(!user) {
       return res.status(404).json({
-        msg: "User does not exist anymore"
+        errors: {
+          error: "User does not exist anymore"
+        }
       });
     }
       

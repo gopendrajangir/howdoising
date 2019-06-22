@@ -1,8 +1,10 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import SvgSprite from 'assets/images/sprite.svg';
+import { logIn } from "actions/auth";
 
 const LogInForm = ({ touched, errors, isSubmitting }) => {
   return(
@@ -47,8 +49,9 @@ const FormikApp = withFormik({
       password: '',
     }
   },
-  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
+  handleSubmit(values, { resetForm, setErrors, setSubmitting, props }) {
 
+    const { logInUser, history } = props;
     const { username, password } = values;
         
     const jsonBody = JSON.stringify({
@@ -74,7 +77,9 @@ const FormikApp = withFormik({
       if(data.errors) {
         setErrors({ 'username': data.errors.username, 'password': data.errors.password });
       } else {
+        logInUser(data.user);
         resetForm();
+        history.push('/profile');
       }
       setSubmitting(false);
     })
@@ -88,4 +93,14 @@ const FormikApp = withFormik({
   })
 })(LogInForm);
 
-export default FormikApp;
+const mapStateToProps = (state) => {
+  return {
+    uid: state.auth.uid,
+    isLoggedIn: state.auth.isLoggedIn,
+    user: state.auth.user
+  }
+}
+
+export default withRouter(connect(mapStateToProps, {
+  logInUser: logIn
+})(FormikApp));

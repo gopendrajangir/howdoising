@@ -95,11 +95,15 @@ module.exports = (req, res) => {
                   console.log("Error in collection find one at logout route", err);
                   return res.status(500).send("Internal Server Error");
                 }
-    
+                
+                console.log(session);
+
                 if(!session) {
                   return res.status(404).json({
-                    msg: "Session not found"
-                  })
+                    errors: {
+                      error: "Session not found"
+                    }
+                  });
                 }
     
                 const sessions = user.sessions;

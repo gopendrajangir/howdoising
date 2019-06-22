@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SvgSprite from 'assets/images/sprite.svg';
+import { logOut } from 'actions/auth';
 
 const Navigation = ({ isLoggedIn, user }) => {
   return (
@@ -83,7 +84,6 @@ const Navigation = ({ isLoggedIn, user }) => {
                   Logout
                 </span>
               </Link>
-              
             </span>
           </span>
         </React.Fragment>
@@ -110,4 +110,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Navigation);
+export default connect(mapStateToProps, { logOutUser: logOut })(Navigation);
