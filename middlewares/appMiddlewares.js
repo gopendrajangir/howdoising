@@ -12,7 +12,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 const express = require('express');
 
-const mongooseStore = new MS({
+export const mongooseStore = new MS({
   modelName: 'session'
 });
 
@@ -25,7 +25,7 @@ module.exports = (app) => {
   
   app.use(session({
     secret,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     store: mongooseStore,
     cookie: {
