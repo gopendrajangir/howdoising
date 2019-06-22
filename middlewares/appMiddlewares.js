@@ -25,7 +25,7 @@ module.exports = (app) => {
   
   app.use(session({
     secret,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     store: mongooseStore,
     cookie: {

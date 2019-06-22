@@ -28,13 +28,19 @@ module.exports = (req, res) => {
         browser: ua.browser,
         version: ua.version
       }
-
+      
       req.login(sessionUser, (err) => {
         if(err) {
           console.log("Error in req login at login route", err);
           return res.status(500).send("Internal Server Error");
         }
-        res.status(200).json({ user });
+        req.session.save(() => {
+          if(err) {
+            console.log("Error in req session save at login route", err);
+            return res.status(500).send("Internal Server Error");
+          }
+          res.status(200).json({ user });
+        });
       });
     }
   })(req, res);
