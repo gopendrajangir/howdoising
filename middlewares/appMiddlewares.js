@@ -12,9 +12,11 @@ const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 const express = require('express');
 
-exports.mongooseStore = new MS({
+const mongooseStore = new MS({
   modelName: 'session'
 });
+
+exports.mongooseStore;
 
 module.exports = (app) => {
   
