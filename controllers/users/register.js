@@ -1,6 +1,3 @@
-const mongoose = require('./../../bin/www').mongoose;
-const db = mongoose.connection.db;
-
 const useragent = require('express-useragent');
 const bcrypt = require('bcrypt');
 
@@ -78,55 +75,26 @@ module.exports = (req, res) => {
               }
               return res.status(500).send("Internal Server Error");
             }
+            
             delete user.password;
-            req.login(user, (err) => {
+
+            const source = req.headers['user-agent'];
+            const ua = useragent.parse(source);
+
+            const sessionUser = {
+              sid: req.sessionID,
+              platform: ua.platform,
+              os: ua.os,
+              browser: ua.browser,
+              version: ua.version
+            }
+
+            req.login(sessionUser, (err) => {
               if(err) {
                 console.log("Error in req login at register route", err);
                 return res.status(500).send("Internal Server Error");
               }
-              
-              const sessionID = req.sessionID;
-
-              const collection = db.collection('sessions')
-              
-              collection.findOne({ sid: sessionID }, (err, session) => {
-
-                if(err) {
-                  console.log("Error in collection find one at logout route", err);
-                  return res.status(500).send("Internal Server Error");
-                }
-                
-                console.log(session);
-
-                if(!session) {
-                  return res.status(404).json({
-                    errors: {
-                      error: "Session not found"
-                    }
-                  });
-                }
-    
-                const sessions = user.sessions;
-                const source = req.headers['user-agent'];
-                const ua = useragent.parse(source);
-        
-                sessions.push({
-                  $ref: 'sessions',
-                  $id: session._id,
-                  platform: ua.platform,
-                  os: ua.os,
-                  browser: ua.browser,
-                  version: ua.version
-                });
-    
-                User.findOneAndUpdate({ email: user.email }, { sessions }, (err, result) => {
-                  if(err) {
-                    console.log("Error in user update one at register route", err);
-                    return res.status(500).send("Internal Server Error");
-                  }
-                  res.status(200).json({ user });
-                });
-              });
+              res.status(200).json({ user });
             });
           });
         });

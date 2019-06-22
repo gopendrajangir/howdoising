@@ -17,12 +17,12 @@ const mongooseStore = new MS({
 });
 
 module.exports = (app) => {
-
+  
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));  
-
+  
   app.use(logger('dev'));
-
+  
   app.use(session({
     secret,
     resave: true,
@@ -57,14 +57,14 @@ module.exports = (app) => {
         return done(null, false, { password: "Incorrect Password"});
       });
     });
-  }));
+  }));  
 
   passport.serializeUser((user, done) => {
-    done(null, user._id);
+    done(null, user);
   });
-  
-  passport.deserializeUser((id, done) => {
-    done(null, id);
+
+  passport.deserializeUser((user, done) => {
+    done(null, user);
   });
   
   app.use('/apis', apis);

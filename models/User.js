@@ -34,10 +34,6 @@ const UserSchema = new Schema({
   },
   image: {
     type: Schema.Types.Mixed
-  },
-  sessions: {
-    type: Schema.Types.Mixed,
-    default: []
   }
 });
 
