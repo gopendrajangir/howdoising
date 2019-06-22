@@ -13,6 +13,6 @@ router.route('/logout')
   .get(controllers.logout);
 
 router.route('/session/logout/:id')
-  .post(controllers.sessionLogout);
+  .get(controllers.sessionLogout);
 
 module.exports = router;
