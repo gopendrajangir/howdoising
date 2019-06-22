@@ -1,7 +1,7 @@
 // const mongoose = require('./../../bin/www').mongoose;
 // const ObjectId = mongoose.Types.ObjectId;
 // const db = mongoose.connection.db;
-const mongooseStore = require('./../../middlewares/appMiddlewares').mongooseStore;
+// const mongooseStore = require('./../../middlewares/appMiddlewares').mongooseStore;
 
 module.exports = (req, res) => {
   
@@ -22,7 +22,7 @@ module.exports = (req, res) => {
   //     });  
   //   }
     
-    mongooseStore.destroy(sid, (err) => {
+    req.session.store.destroy(sid, (err) => {
       if(err) {
         console.log(err);
       }
