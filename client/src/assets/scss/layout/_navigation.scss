@@ -110,7 +110,14 @@
         }
       }
 
+      #app-profile-navigation:checked {
+       & + span {
+         display: flex !important;
+       } 
+      }
+
       &-nav {
+        display: none !important;
         background-color: $color-white;
         padding: 1.5rem;
         padding-bottom: 2rem;

@@ -3,8 +3,26 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SvgSprite from 'assets/images/sprite.svg';
 import { logOut } from 'actions/auth';
+import $ from 'jquery';
 
 const Navigation = ({ isLoggedIn, user }) => {
+
+  const body = document.getElementsByTagName('body')[0];
+  
+  body.addEventListener('click', (event) => {
+    const profileNavLabel = $('.app-navigation-auth-profile-head');
+    const profileNavigation = $('.app-navigation-auth-profile-nav');
+    const profileNavigationInput = $('#app-profile-navigation');
+
+    if(profileNavigation) {
+      if(!profileNavigation.has($(event.target)).length && ($(event.target).is(profileNavigation) || profileNavLabel.has($(event.target)).length || $(event.target).is(profileNavLabel) || $(event.target).is(profileNavigationInput))) {
+      } else {
+        profileNavigationInput.prop('checked', false);
+        profileNavigation.css('display', 'none !important');
+      }
+    }
+  });
+
   return (
     <div className="app-navigation">
       <div className="app-navigation-logo">
@@ -38,7 +56,7 @@ const Navigation = ({ isLoggedIn, user }) => {
             </Link>
           </span>
           <span className="app-navigation-auth-profile">
-            <span className="app-navigation-auth-profile-head">
+            <label htmlFor="app-profile-navigation" className="app-navigation-auth-profile-head">
               <span className="app-navigation-auth-profile-head-image">
                 <img src={`http://localhost:5000/apis/images/${user.image.$id}`} alt="user"/>
               </span>
@@ -52,7 +70,8 @@ const Navigation = ({ isLoggedIn, user }) => {
                   <use xlinkHref={`${SvgSprite}#icon-cheveron-down`} />
                 </svg>
               </span>
-            </span>
+            </label>
+            <input hidden id="app-profile-navigation" type="checkbox" />
             <span className="app-navigation-auth-profile-nav">
               <Link className="app-navigation-auth-profile-nav-link" to="/profile">
                 <span className="app-navigation-auth-profile-nav-link-icon">
