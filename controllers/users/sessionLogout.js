@@ -1,7 +1,7 @@
 // const mongoose = require('./../../bin/www').mongoose;
 // const ObjectId = mongoose.Types.ObjectId;
 // const db = mongoose.connection.db;
-const mongooseStore = require('./../../middlewares/appMiddlewares');
+const mongooseStore = require('./../../middlewares/appMiddlewares').mongooseStore;
 
 module.exports = (req, res) => {
   
