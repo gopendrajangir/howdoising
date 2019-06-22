@@ -1,4 +1,3 @@
 module.exports = (req, res) => {
-  console.log("user", req.user);
-  res.send("done");
+  res.status(200).json(req.user);
 }
