@@ -16,8 +16,6 @@ const mongooseStore = new MS({
   modelName: 'session'
 });
 
-exports.mongooseStore;
-
 module.exports = (app) => {
   
   app.use(bodyParser.json());
@@ -69,6 +67,16 @@ module.exports = (app) => {
     done(null, user);
   });
   
+  app.use((req, res, next) => {
+    req.session.reload((err) => {
+      if(err) {
+        console.log("Error in req session reload at middleware", err);
+        return res.status(500).send("Internal Server Error");  
+      }
+    });
+    next();
+  });
+
   app.use('/apis', apis);
   
   app.use(express.static(path.resolve(__dirname, '../client/build')));
