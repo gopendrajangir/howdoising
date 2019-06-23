@@ -1,7 +1,5 @@
-const mongoose = require('./../../bin/www').mongoose;
 module.exports = (req, res) => {
-  console.log(req.user);
-  req.session.destroy((err) => {
+  req.logout((err) => {
     if(err) {
       console.log("Error in req session destory at logout route", err);
       return res.status(500).send("Internal Server Error");
