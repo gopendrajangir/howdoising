@@ -8,7 +8,7 @@ module.exports = (req, res) => {
 
   const collection = db.collection('sessions');
   
-  collection.updateOne({ _id: ObjectId(id) }, { $set: {sessions: {}} },(err, session) => {
+  collection.updateOne({ _id: ObjectId(id) }, { $set: {session: {}} },(err, session) => {
   
     if(err) {
       console.log("Error in collection find one at session logout route", err);
