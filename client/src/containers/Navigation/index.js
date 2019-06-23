@@ -58,7 +58,7 @@ const Navigation = ({ isLoggedIn, user }) => {
           <span className="app-navigation-auth-profile">
             <label htmlFor="app-profile-navigation" className="app-navigation-auth-profile-head">
               <span className="app-navigation-auth-profile-head-image">
-                <img src={`http://localhost:5000/apis/images/${user.image.$id}`} alt="user"/>
+                <img src={`${window.location.hostname}/apis/images/${user.image.$id}`} alt="user"/>
               </span>
               <span className="app-navigation-auth-profile-head-name">
               {
