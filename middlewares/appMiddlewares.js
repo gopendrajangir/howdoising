@@ -72,14 +72,10 @@ module.exports = (app) => {
 
     const sessionID = req.sessionID;
 
-    console.log(sessionID);
-
     const collection = db.collection('sessions');
     
     collection.findOne({ sid: sessionID }, (err, session) => {
     
-      console.log(session);
-      
       if(err) {
         console.log("Error in collection find one at session logout route", err);
         return res.status(500).send("Internal Server Error");
@@ -89,19 +85,22 @@ module.exports = (app) => {
         return next();  
       }
 
-      if(!Object.keys(session.session).length) {
+      if(!session.session) {
         req.logout();
         return res.status(200).json({
           msg: "You logged out successfully"
         });
       }
-      
-      next();
-
+      return next();
     });
   });
 
   app.use('/apis', apis);
+
+  app.use(express.static(path.resolve(__dirname, '../client/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+  });
 
   if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, '../client/build')));
