@@ -18,235 +18,241 @@
   }
 
   .app-navigation-auth {
-    @include flexRowCenter;
     
-    & > * {
-      &:not(:last-child) {
-        margin-right: 5rem;
-      }
-    }
-    
-    &-sing {
+    &-protected {
       @include flexRowCenter;
 
-      &-link {
+      & > * {
+        &:not(:last-child) {
+          margin-right: 5rem;
+        }
+      }
+      
+      &-sing {
         @include flexRowCenter;
-        background-color: $color-red;
-        padding: .8rem 2.5rem;
-        border-radius: 3rem;
-        transition: .3s;
-
-        &:hover {
-          transform: translateY(-4%);
-          box-shadow: 0rem .4rem .4rem $color-grey-dark-2;
-        }
-
-        &:active {
-          transform: translateY(0%);
-          box-shadow: 0rem 0rem 0rem $color-grey-dark-2;
-        }
-        
-        &-icon {
-          svg {
-            width: 1.5rem;
-            height: 1.5rem;
-            fill: $color-white;
+  
+        &-link {
+          @include flexRowCenter;
+          background-color: $color-red;
+          padding: .8rem 2.5rem;
+          border-radius: 3rem;
+          transition: .3s;
+  
+          &:hover {
+            transform: translateY(-4%);
+            box-shadow: 0rem .4rem .4rem $color-grey-dark-2;
+          }
+  
+          &:active {
+            transform: translateY(0%);
+            box-shadow: 0rem 0rem 0rem $color-grey-dark-2;
+          }
+          
+          &-icon {
+            svg {
+              width: 1.5rem;
+              height: 1.5rem;
+              fill: $color-white;
+            }
+          }
+          
+          &-title {
+            @include flexRowCenter;
+            margin-top: -4px;
+            letter-spacing: .4px;
+            margin-left: .6rem;
+            color: $color-white;
           }
         }
+      }
+      
+      &-notifications {
+        @include flexColumnCenter;
+        justify-content: flex-start;
+        position: relative;
         
-        &-title {
+        &-head {
           @include flexRowCenter;
-          margin-top: -4px;
-          letter-spacing: .4px;
-          margin-left: .6rem;
+          cursor: pointer;
+          border-radius: 2.5rem;
+          transition: .3s;
+    
+          &-icon {
+            position: relative;
+            @include flexRowCenter;
+  
+            &-number {
+              @include flexRowCenter;
+              color: white;
+              font-size: 1rem;
+              position: absolute;
+              width: 1.8rem;
+              height: 1.8rem;
+              background-color: $color-red;
+              border-radius: 50%;
+              transform: translate(60%, -50%);
+            }
+  
+            & > svg {
+              width: 2rem;
+              height: 2rem;
+              fill: $color-white;
+            }
+          }
+        }
+  
+        #app-notifications-navigation:checked {
+         & + span {
+           display: flex !important;
+         } 
+        }
+  
+        &-list {
+          @include flexRowCenter;
+          display: none !important;
+          width: 35rem;
+          height: 40rem;
+          position: absolute;
+          background-color: $color-white;
+          padding: 1.5rem;
+          padding-bottom: 2rem;
+          box-shadow: 0 0 1rem $color-grey-dark-2;
+          border-radius: .2rem;
+          top: -1.2rem;
+          right: 2.5rem;
+        }
+      }
+  
+      &-profile {
+        @include flexRowCenter;
+        position: relative;
+        
+        &-head {
+          @include flexRowCenter;
+          cursor: pointer;
+          background-color: $color-white;
+          border-radius: 2.5rem;
+          padding: 3px;
+          transition: .3s;
+  
+          & > * {
+            margin-right: .5rem;
+          }
+          
+          &-name {
+            color: $color-blue-dark;
+            margin-right: 0rem;
+            margin-top: -3px;
+          }
+    
+          &-image {
+            @include flexRowCenter;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid $color-white;
+  
+            & > img {
+              height: 100%;
+            }
+          }
+    
+          &-icon {
+            @include flexRowCenter;
+            padding-top: 1px;
+            margin-right: .2rem;
+  
+            & > svg {
+              width: 2.5rem;
+              height: 2.5rem;
+              fill: $color-blue-dark;
+            }
+          }
+        }
+  
+        #app-profile-navigation:checked {
+         & + span {
+           display: flex !important;
+         } 
+        }
+  
+        &-nav {
+          display: none !important;
+          background-color: $color-white;
+          padding: 1.5rem;
+          padding-bottom: 2rem;
+          box-shadow: 0 0 1rem $color-grey-dark-2;
+          border-radius: 5px;
+          position: absolute;
+          top: $navigation-bar-height - 1.5rem;
+          left: 0px;
+          
+          @include flexColumnCenter;
+          align-items: flex-start;
+  
+          &-link {
+            margin-bottom: .5rem;
+            @include flexRowCenter;
+            justify-content: flex-start;
+            padding: 0rem 2rem;
+  
+            &-icon {
+              margin-right: 1rem;
+              
+              svg {
+                height: 1.3rem;
+                width: 1.3rem;
+                fill: $color-grey-dark-3;
+              }
+            }
+  
+            &:hover {
+              svg {
+                fill: $color-red;
+              }
+  
+              span[class*="-title"] {
+                color: $color-grey-dark-3;
+              }
+            }
+  
+            &-title {
+              color: $color-grey-light-3;
+            }
+          }
+        }
+      }
+    }
+
+    &-public {
+
+      & > a {
+  
+        &:first-child {
+          background-color: $color-white;
+          color: $color-blue-light;
+        }
+  
+        display: inline-block;
+        text-align: center;
+        border: 1px solid $color-white;
+        width: 9rem;
+        height: 3.8rem;
+        line-height: 3.25rem;
+        margin-left: 2rem;
+        letter-spacing: .5px;
+        padding-left: 2px;
+        
+        &:hover {
+          background-color: white;
+          color: $color-blue-light;
+        }
+        
+        &:active {
+          background-color: transparent;
           color: $color-white;
         }
-      }
-    }
-    
-    &-notifications {
-      @include flexColumnCenter;
-      justify-content: flex-start;
-      position: relative;
-      
-      &-head {
-        @include flexRowCenter;
-        cursor: pointer;
-        border-radius: 2.5rem;
-        transition: .3s;
-  
-        &-icon {
-          position: relative;
-          @include flexRowCenter;
-
-          &-number {
-            @include flexRowCenter;
-            color: white;
-            font-size: 1rem;
-            position: absolute;
-            width: 1.8rem;
-            height: 1.8rem;
-            background-color: $color-red;
-            border-radius: 50%;
-            transform: translate(60%, -50%);
-          }
-
-          & > svg {
-            width: 2rem;
-            height: 2rem;
-            fill: $color-white;
-          }
-        }
-      }
-
-      #app-notifications-navigation:checked {
-       & + span {
-         display: flex !important;
-       } 
-      }
-
-      &-list {
-        @include flexRowCenter;
-        display: none !important;
-        width: 35rem;
-        height: 40rem;
-        position: absolute;
-        background-color: $color-white;
-        padding: 1.5rem;
-        padding-bottom: 2rem;
-        box-shadow: 0 0 1rem $color-grey-dark-2;
-        border-radius: .2rem;
-        top: -1.2rem;
-        right: 2.5rem;
-      }
-    }
-
-    &-profile {
-      @include flexRowCenter;
-      position: relative;
-      
-      &-head {
-        @include flexRowCenter;
-        cursor: pointer;
-        background-color: $color-white;
-        border-radius: 2.5rem;
-        padding: 3px;
-        transition: .3s;
-
-        & > * {
-          margin-right: .5rem;
-        }
-        
-        &-name {
-          color: $color-blue-dark;
-          margin-right: 0rem;
-          margin-top: -3px;
-        }
-  
-        &-image {
-          @include flexRowCenter;
-          width: 4rem;
-          height: 4rem;
-          border-radius: 50%;
-          overflow: hidden;
-          border: 2px solid $color-white;
-
-          & > img {
-            height: 100%;
-          }
-        }
-  
-        &-icon {
-          @include flexRowCenter;
-          padding-top: 1px;
-          margin-right: .2rem;
-
-          & > svg {
-            width: 2.5rem;
-            height: 2.5rem;
-            fill: $color-blue-dark;
-          }
-        }
-      }
-
-      #app-profile-navigation:checked {
-       & + span {
-         display: flex !important;
-       } 
-      }
-
-      &-nav {
-        display: none !important;
-        background-color: $color-white;
-        padding: 1.5rem;
-        padding-bottom: 2rem;
-        box-shadow: 0 0 1rem $color-grey-dark-2;
-        border-radius: 5px;
-        position: absolute;
-        top: $navigation-bar-height - 1.5rem;
-        left: 0px;
-        
-        @include flexColumnCenter;
-        align-items: flex-start;
-
-        &-link {
-          margin-bottom: .5rem;
-          @include flexRowCenter;
-          justify-content: flex-start;
-          padding: 0rem 2rem;
-
-          &-icon {
-            margin-right: 1rem;
-            
-            svg {
-              height: 1.3rem;
-              width: 1.3rem;
-              fill: $color-grey-dark-3;
-            }
-          }
-
-          &:hover {
-            svg {
-              fill: $color-red;
-            }
-
-            span[class*="-title"] {
-              color: $color-grey-dark-3;
-            }
-          }
-
-          &-title {
-            color: $color-grey-light-3;
-          }
-        }
-      }
-    }
-
-    & > a {
-
-      &:first-child {
-        background-color: $color-white;
-        color: $color-blue-light;
-      }
-
-      display: inline-block;
-      text-align: center;
-      border: 1px solid $color-white;
-      width: 9rem;
-      height: 3.8rem;
-      line-height: 3.25rem;
-      margin-left: 2rem;
-      letter-spacing: .5px;
-      padding-left: 2px;
-      
-      &:hover {
-        background-color: white;
-        color: $color-blue-light;
-      }
-      
-      &:active {
-        background-color: transparent;
-        color: $color-white;
       }
     }
   }
