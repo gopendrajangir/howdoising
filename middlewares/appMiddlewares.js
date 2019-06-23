@@ -91,10 +91,13 @@ module.exports = (app) => {
 
       if(!Object.keys(session.session).length) {
         req.logout();
-        res.status(200).json({
+        return res.status(200).json({
           msg: "You logged out successfully"
         });
       }
+      
+      next();
+
     });
   });
 
