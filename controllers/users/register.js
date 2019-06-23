@@ -94,13 +94,7 @@ module.exports = (req, res) => {
                 console.log("Error in req login at register route", err);
                 return res.status(500).send("Internal Server Error");
               }
-              req.session.save((err) => {
-                if(err) {
-                  console.log("Error in req session save at register route", err);
-                  return res.status(500).send("Internal Server Error");
-                }
-                res.status(200).json({ user });
-              });
+              res.status(200).json({ user });
             });
           });
         });

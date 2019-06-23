@@ -73,8 +73,8 @@ module.exports = (app) => {
         console.log("Error in req session reload at middleware", err);
         return res.status(500).send("Internal Server Error");  
       }
+      next();
     });
-    next();
   });
 
   app.use('/apis', apis);
