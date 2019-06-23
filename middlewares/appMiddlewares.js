@@ -79,7 +79,7 @@ module.exports = (app) => {
     collection.findOne({ sid: sessionID }, (err, session) => {
     
       console.log(session);
-
+      
       if(err) {
         console.log("Error in collection find one at session logout route", err);
         return res.status(500).send("Internal Server Error");
@@ -88,10 +88,13 @@ module.exports = (app) => {
       if(!session) {
         return next();  
       }
-      req.logout();
-      res.status(200).json({
-        msg: "You logged out successfully"
-      });
+
+      if(!Object.keys(session.session).length) {
+        req.logout();
+        res.status(200).json({
+          msg: "You logged out successfully"
+        });
+      }
     });
   });
 
