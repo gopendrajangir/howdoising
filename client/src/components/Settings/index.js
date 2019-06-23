@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import Settings from "containers/Settings";
 
 export default () => {
   return (
     <div className="settings-container">
-      <h1>Settings</h1>
+      <Settings />
     </div>
   );
-}
+};

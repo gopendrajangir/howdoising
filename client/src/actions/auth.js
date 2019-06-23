@@ -1,21 +1,18 @@
-import {
-  LOG_IN,
-  LOG_OUT,
-} from 'actions/types';
+import { LOG_IN, LOG_OUT } from "actions/types";
 
-export const logIn = (user) => {
-  return (dispatch) => {
+export const logIn = user => {
+  return dispatch => {
     dispatch({
       type: LOG_IN,
       payload: user
     });
-  }
-}
+  };
+};
 
 export const logOut = () => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: LOG_OUT
     });
-  }
-}
+  };
+};

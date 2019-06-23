@@ -1,6 +1,6 @@
-import React from 'react';
-import ModalLayout from 'shared/ModalLayout';
-import SignupForm from 'containers/SignupForm';
+import React from "react";
+import ModalLayout from "shared/ModalLayout";
+import SignupForm from "containers/SignupForm";
 
 export default () => {
   return (
@@ -10,4 +10,4 @@ export default () => {
       </div>
     </ModalLayout>
   );
-}
+};

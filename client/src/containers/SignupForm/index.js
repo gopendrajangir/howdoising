@@ -1,41 +1,64 @@
-import React from 'react';
-import { withFormik, Form, Field } from 'formik';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import * as Yup from 'yup';
-import UserPhoto from 'assets/images/user.jpg';
-import SvgSprite from 'assets/images/sprite.svg';
+import React from "react";
+import { withFormik, Form, Field } from "formik";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import * as Yup from "yup";
+import UserPhoto from "assets/images/user.jpg";
+import SvgSprite from "assets/images/sprite.svg";
 import { logIn } from "actions/auth";
 
-const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})");
-const  mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+const strongRegex = new RegExp(
+  "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+);
+const mediumRegex = new RegExp(
+  "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
+);
 
 let imageData;
 
-const onFileChange = (e) => {
+const onFileChange = e => {
   [imageData] = e.target.files;
-  const userImg = document.querySelector('.signup-form .signup-image');
+  const userImg = document.querySelector(".signup-form .signup-image");
   const reader = new FileReader();
   e.persist();
 
-  reader.onload = (event) => {
+  reader.onload = event => {
     userImg.src = event.target.result;
-  }
+  };
   reader.readAsDataURL(e.target.files[0]);
-}
+};
 
-const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
-  return(
+const SignUpForm = ({
+  values,
+  touched,
+  errors,
+  isSubmitting,
+  isLoggedIn,
+  history
+}) => {
+  if (isLoggedIn) {
+    return <div>{history.push("/profile")}</div>;
+  }
+
+  return (
     <Form className="signup-form">
       <div className="signup-left">
         <div className="signup-profile-pic">
           <label htmlFor="user-photo" className="choose-photo">
-            <img className="signup-image" src={UserPhoto} alt='user' />
+            <img className="signup-image" src={UserPhoto} alt="user" />
             <label htmlFor="user-photo" className="choose-photo-cover">
-              Choose<br/>Photo
+              Choose
+              <br />
+              Photo
             </label>
           </label>
-          <Field hidden onChange={onFileChange} type="file" id="user-photo" name="image" />
+          <Field
+            hidden
+            onChange={onFileChange}
+            type="file"
+            id="user-photo"
+            name="image"
+          />
         </div>
         <div className="signup-error">
           {touched.email && errors.email && <p>{errors.email}</p>}
@@ -49,7 +72,9 @@ const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
           </div>
         </div>
         <div className="signup-error">
-          {touched.displayname && errors.displayname && <p>{errors.displayname}</p>}
+          {touched.displayname && errors.displayname && (
+            <p>{errors.displayname}</p>
+          )}
         </div>
         <div className="signup-display-name">
           <div>
@@ -66,11 +91,15 @@ const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
           <div>
             <Field type="password" placeholder="Password" name="password" />
             <span className="password-strength">
-              {strongRegex.test(values.password) ?
+              {strongRegex.test(values.password) ? (
                 <span className="text-green">Strong</span>
-                : mediumRegex.test(values.password) ?
-                  <span className="text-orange">Medium</span>
-                  : values.password === '' ? '' : <span className="text-red">Weak</span>}
+              ) : mediumRegex.test(values.password) ? (
+                <span className="text-orange">Medium</span>
+              ) : values.password === "" ? (
+                ""
+              ) : (
+                <span className="text-red">Weak</span>
+              )}
             </span>
             <svg>
               <use xlinkHref={`${SvgSprite}#icon-key`} />
@@ -79,7 +108,8 @@ const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
         </div>
         <div className="signup-password-tip">
           <p>
-            Strong Password must contain at least a capital letter, a small letter, a digit and a symbol
+            Strong Password must contain at least a capital letter, a small
+            letter, a digit and a symbol
           </p>
         </div>
       </div>
@@ -93,15 +123,19 @@ const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
               <Field id="checkbox-bollywood" type="checkbox" name="bollywood" />
               <label htmlFor="checkbox-bollywood">
                 <span>
-                <svg>
-                  <use xlinkHref={`${SvgSprite}#icon-checkmark`} />
-                </svg>
+                  <svg>
+                    <use xlinkHref={`${SvgSprite}#icon-checkmark`} />
+                  </svg>
                 </span>
               </label>
               <span>Bollywood</span>
             </label>
             <label htmlFor="checkbox-indian-classical">
-              <Field id="checkbox-indian-classical" type="checkbox" name="indian" />
+              <Field
+                id="checkbox-indian-classical"
+                type="checkbox"
+                name="indian"
+              />
               <label htmlFor="checkbox-indian-classical">
                 <span>
                   <svg>
@@ -133,7 +167,12 @@ const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
           </div>
           <div className="signup-singing-level-labels">
             <label htmlFor="radio-beginner">
-              <Field id="radio-beginner" type="radio" name="level" value="Beginner" />
+              <Field
+                id="radio-beginner"
+                type="radio"
+                name="level"
+                value="Beginner"
+              />
               <label htmlFor="radio-beginner">
                 <span>
                   <span />
@@ -142,7 +181,12 @@ const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
               <span>Beginner</span>
             </label>
             <label htmlFor="radio-intermediate">
-              <Field id="radio-intermediate" type="radio" name="level" value="Intermediate" />
+              <Field
+                id="radio-intermediate"
+                type="radio"
+                name="level"
+                value="Intermediate"
+              />
               <label htmlFor="radio-intermediate">
                 <span>
                   <span />
@@ -151,7 +195,12 @@ const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
               <span>Intermediate</span>
             </label>
             <label htmlFor="radio-expert">
-              <Field id="radio-expert" type="radio" name="level" value="Expert" />
+              <Field
+                id="radio-expert"
+                type="radio"
+                name="level"
+                value="Expert"
+              />
               <label htmlFor="radio-expert">
                 <span>
                   <span />
@@ -162,104 +211,128 @@ const SignUpForm = ({ values, touched, errors, isSubmitting }) => {
           </div>
         </div>
         <div className="signup-button">
-          <button className="primary-button" type="submit" disabled={isSubmitting}>
+          <button
+            className="primary-button"
+            type="submit"
+            disabled={isSubmitting}
+          >
             Sign up
           </button>
         </div>
         <div className="signup-redirect">
-          <p>Already have an account ? &nbsp;</p><Link to="/login">Login</Link>
+          <p>Already have an account ? &nbsp;</p>
+          <Link to="/login">Login</Link>
         </div>
-      </div>      
+      </div>
     </Form>
   );
-}
+};
 
 const FormikApp = withFormik({
   mapPropsToValues() {
     return {
-      displayname: '',
-      email: '',
-      password: '',
-      level: '',
-      image: ''
-    }
+      displayname: "",
+      email: "",
+      password: "",
+      level: "",
+      image: ""
+    };
   },
   handleSubmit(values, { resetForm, setErrors, setSubmitting, props }) {
-
     const { logInUser, history } = props;
 
-    const { displayname, email, password, level} = values;
-    
+    const { displayname, email, password, level } = values;
+
     const formdata = new FormData();
 
     formdata.append("displayname", displayname);
     formdata.append("email", email);
     formdata.append("password", password);
     formdata.append("level", level);
-    
+
     const style = [];
 
-    if(values.bollywood)
-      style.push('Bollywood');
-      
-    if(values.indian)
-      style.push('Indian Classical');
-      
-    if(values.english)
-      style.push('English');
+    if (values.bollywood) style.push("Bollywood");
 
-    formdata.append('style', style);
+    if (values.indian) style.push("Indian Classical");
 
-    formdata.append('image', imageData);
+    if (values.english) style.push("English");
 
-    window.fetch("/apis/users/register", {
-      credentials: "include",
-      method: 'POST',
-      body: formdata
-    })
-    .then((results) => {
-      if(results.status === 500)
-        throw Error('Internal Server Error');
-      return results.json();
-    })
-    .then((data) => {
-      if(data.errors) {
-        setErrors(
-          {
-            'email': data.errors.email || '',
-            'password': data.errors.password || '',
-            'displayname': data.errors.displayname || '',
-            'level': data.errors.level || ''
-          }
-        );
-      } else {
-        logInUser(data.user);
-        resetForm();
-        history.push('/profile');
-      }
-      setSubmitting(false);
-    })
-    .catch((err) => {
-      console.log(err.message);
-      setSubmitting(false);
-    })
+    formdata.append("style", style);
+
+    formdata.append("image", imageData);
+
+    window
+      .fetch("/apis/users/register", {
+        credentials: "include",
+        method: "POST",
+        body: formdata
+      })
+      .then(results => {
+        if (results.status === 500) throw Error("Internal Server Error");
+        return results.json();
+      })
+      .then(data => {
+        if (data.errors) {
+          setErrors({
+            email: data.errors.email || "",
+            password: data.errors.password || "",
+            displayname: data.errors.displayname || "",
+            level: data.errors.level || ""
+          });
+        } else {
+          logInUser(data.user);
+          resetForm();
+          history.push("/profile");
+        }
+        setSubmitting(false);
+      })
+      .catch(err => {
+        console.log(err.message);
+        setSubmitting(false);
+      });
   },
   validationSchema: Yup.object().shape({
-    displayname: Yup.string().min(5, "Display name must be greater or equal to 5 and smaller or equal to 15").max(15, "Display name must be greater or equal to 5 and smaller or equal to 15").required("Display name is required"),
-    email: Yup.string().email("Invalid Email").required("Email is required"),
-    password: Yup.string().min(5, "Password must be greater or equal to 5 and smaller or equal to 25").max(25, "Passsword must be greater or equal to 5 and smaller or equal to 25").required('Password is required'),
-    level: Yup.string("Invalid level").required('Singing level is required'),
+    displayname: Yup.string()
+      .min(
+        5,
+        "Display name must be greater or equal to 5 and smaller or equal to 15"
+      )
+      .max(
+        15,
+        "Display name must be greater or equal to 5 and smaller or equal to 15"
+      )
+      .required("Display name is required"),
+    email: Yup.string()
+      .email("Invalid Email")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(
+        5,
+        "Password must be greater or equal to 5 and smaller or equal to 25"
+      )
+      .max(
+        25,
+        "Passsword must be greater or equal to 5 and smaller or equal to 25"
+      )
+      .required("Password is required"),
+    level: Yup.string("Invalid level").required("Singing level is required")
   })
 })(SignUpForm);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     uid: state.auth.uid,
     isLoggedIn: state.auth.isLoggedIn,
     user: state.auth.user
-  }
-}
+  };
+};
 
-export default withRouter(connect(mapStateToProps, {
-  logInUser: logIn
-})(FormikApp));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    {
+      logInUser: logIn
+    }
+  )(FormikApp)
+);

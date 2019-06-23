@@ -2,11 +2,12 @@
   height: $navigation-bar-height;
   padding: 0rem 4rem;
 
+
   @include flexRowCenter;
   justify-content: space-between;
 
   a {
-    color: white;
+    color: $color-white;
     text-decoration: none;
   }
 
@@ -20,17 +21,18 @@
     @include flexRowCenter;
     
     & > * {
-      margin-right: 1rem;
+      &:not(:last-child) {
+        margin-right: 5rem;
+      }
     }
     
-    &-record {
+    &-sing {
       @include flexRowCenter;
-      margin-right: 2rem;
 
       &-link {
         @include flexRowCenter;
         background-color: $color-red;
-        padding: .8rem 1.8rem;
+        padding: .8rem 2.5rem;
         border-radius: 3rem;
         transition: .3s;
 
@@ -62,6 +64,63 @@
       }
     }
     
+    &-notifications {
+      @include flexColumnCenter;
+      justify-content: flex-start;
+      position: relative;
+      
+      &-head {
+        @include flexRowCenter;
+        cursor: pointer;
+        border-radius: 2.5rem;
+        transition: .3s;
+  
+        &-icon {
+          position: relative;
+          @include flexRowCenter;
+
+          &-number {
+            @include flexRowCenter;
+            color: white;
+            font-size: 1rem;
+            position: absolute;
+            width: 1.8rem;
+            height: 1.8rem;
+            background-color: $color-red;
+            border-radius: 50%;
+            transform: translate(60%, -50%);
+          }
+
+          & > svg {
+            width: 2rem;
+            height: 2rem;
+            fill: $color-white;
+          }
+        }
+      }
+
+      #app-notifications-navigation:checked {
+       & + span {
+         display: flex !important;
+       } 
+      }
+
+      &-list {
+        @include flexRowCenter;
+        display: none !important;
+        width: 35rem;
+        height: 40rem;
+        position: absolute;
+        background-color: $color-white;
+        padding: 1.5rem;
+        padding-bottom: 2rem;
+        box-shadow: 0 0 1rem $color-grey-dark-2;
+        border-radius: .2rem;
+        top: -1.2rem;
+        right: 2.5rem;
+      }
+    }
+
     &-profile {
       @include flexRowCenter;
       position: relative;
@@ -91,7 +150,7 @@
           border-radius: 50%;
           overflow: hidden;
           border: 2px solid $color-white;
-  
+
           & > img {
             height: 100%;
           }

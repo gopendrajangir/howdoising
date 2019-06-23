@@ -1,40 +1,43 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { logOut } from 'actions/auth';
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { logOut } from "actions/auth";
 
 const Logout = ({ history, isLoggedIn, logOutUser }) => {
-  if(!isLoggedIn) {
-    history.push('/login');
+  if (!isLoggedIn) {
+    return <div>{history.push("/profile")}</div>;
   } else {
-    window.fetch('/apis/users/logout')
-      .then((result) => {
+    window
+      .fetch("/apis/users/logout")
+      .then(result => {
         return result.json();
       })
-      .then((data) => {
-        if(!data.errors) {
-          console.log(data.msg)
-          history.push('/login');
+      .then(data => {
+        if (!data.errors) {
+          console.log(data.msg);
+          history.push("/login");
           logOutUser();
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }
 
-  return (
-    <div>Logout</div>
-  )
-}
+  return <div>Logout</div>;
+};
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     uid: state.auth.uid,
     isLoggedIn: state.auth.isLoggedIn,
     user: state.auth.user
-  }
-}
+  };
+};
 
-export default withRouter(connect(mapStateToProps, { logOutUser: logOut })(Logout));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { logOutUser: logOut }
+  )(Logout)
+);

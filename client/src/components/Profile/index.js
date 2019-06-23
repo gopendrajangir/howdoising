@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import Profile from "containers/Profile";
 
 export default () => {
   return (
     <div className="profile-container">
-      <h1>Profile</h1>
+      <Profile />
     </div>
   );
-}
+};
