@@ -67,6 +67,34 @@ module.exports = (app) => {
     done(null, user);
   });
 
+  app.use((req, res, next) => {
+    const db = mongoose.connection.db;
+
+    const sessionID = req.sessionID;
+
+    console.log(sessionID);
+
+    const collection = db.collection('sessions');
+    
+    collection.findOne({ sid: sessionID }, (err, session) => {
+    
+      console.log(session);
+
+      if(err) {
+        console.log("Error in collection find one at session logout route", err);
+        return res.status(500).send("Internal Server Error");
+      }
+    
+      if(!session) {
+        return next();  
+      }
+      req.logout();
+      res.status(200).json({
+        msg: "You logged out successfully"
+      });
+    });
+  });
+
   app.use('/apis', apis);
 
   if(process.env.NODE_ENV === 'production') {
