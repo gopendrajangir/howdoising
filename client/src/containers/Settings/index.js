@@ -6,7 +6,12 @@ const Settings = ({ history, isLoggedIn }) => {
   if (!isLoggedIn) {
     return <div>{history.push("/login")}</div>;
   }
-  return <h1>Settings</h1>;
+  return (
+    <div className="settings-container">
+      <h1 className="route-heading">Settings</h1>
+      <div className="settings">settings</div>
+    </div>
+  );
 };
 
 const mapStateToProps = state => {

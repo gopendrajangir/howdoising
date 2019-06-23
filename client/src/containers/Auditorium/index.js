@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 const Auditorium = () => {
-  return <h1>Auditorium</h1>;
+  return (
+    <div className="auditorium-container">
+      <h1>Auditorium</h1>;
+    </div>
+  );
 };
 
 const mapStateToProps = state => {

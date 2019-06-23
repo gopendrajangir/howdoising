@@ -34,13 +34,14 @@
         &-link {
           @include flexRowCenter;
           background-color: $color-red;
-          padding: .8rem 2.5rem;
+          border: 2px solid $color-white;
+          padding: .6rem 2.5rem;
           border-radius: 3rem;
           transition: .3s;
+          box-shadow: 0rem .4rem .4rem $color-grey-dark-2;
   
           &:hover {
             transform: translateY(-4%);
-            box-shadow: 0rem .4rem .4rem $color-grey-dark-2;
           }
   
           &:active {
@@ -109,6 +110,7 @@
   
         &-list {
           @include flexRowCenter;
+          z-index: 10;
           display: none !important;
           width: 35rem;
           height: 40rem;
@@ -192,6 +194,7 @@
           align-items: flex-start;
   
           &-link {
+            cursor: pointer;
             margin-bottom: .5rem;
             @include flexRowCenter;
             justify-content: flex-start;

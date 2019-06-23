@@ -1,0 +1,6 @@
+.route-heading {
+  @include flexRowCenter;
+  padding: 2rem 0rem;
+  letter-spacing: 1px;
+  color: $color-white;
+}
