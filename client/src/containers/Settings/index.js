@@ -93,7 +93,7 @@ class Settings extends React.Component {
             )}
             {current === 2 && (
               <div className="settings-main-content">
-                <Sessions uid={uid} />
+                <Sessions />
               </div>
             )}
           </div>

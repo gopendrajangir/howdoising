@@ -56,22 +56,24 @@ export default class Sessions extends React.Component {
   }
 
   removeSession(oid) {
-    window
-      .fetch(`/apis/users/session/logout/${oid}`)
-      .then(results => {
-        if (results.status === 404) {
-          this.fetchSessions();
-        } else if (results.status === 200) {
-          this.fetchSessions();
-        } else if (results.status === 500) {
-          throw Error("Internal Server Error");
-        }
-      })
-      .catch(err => {
-        this.setState({
-          error: err.message
+    return () => {
+      window
+        .fetch(`/apis/users/session/logout/${oid}`)
+        .then(results => {
+          if (results.status === 404) {
+            this.fetchSessions();
+          } else if (results.status === 200) {
+            this.fetchSessions();
+          } else if (results.status === 500) {
+            throw Error("Internal Server Error");
+          }
+        })
+        .catch(err => {
+          this.setState({
+            error: err.message
+          });
         });
-      });
+    };
   }
 
   componentDidMount() {
@@ -80,7 +82,6 @@ export default class Sessions extends React.Component {
 
   render() {
     const { sessions, error } = this.state;
-    const { uid } = this.props;
 
     return (
       <div className="sessions-container">
