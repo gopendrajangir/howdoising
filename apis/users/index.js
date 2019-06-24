@@ -21,6 +21,6 @@ router.route('/private/profile/:id')
   .get(protectedRouteMiddleware, controllers.privateProfile);
 
 router.route('/session/logout/:id')
-  .get(authRouteMiddleware, controllers.sessionLogout);
+  .get(protectedRouteMiddleware, controllers.sessionLogout);
 
 module.exports = router;
