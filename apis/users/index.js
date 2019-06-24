@@ -17,6 +17,9 @@ router.route('/logout')
 router.route('/sessions')
   .get(protectedRouteMiddleware, controllers.sessions);
 
+router.route('/private/profile/:id')
+  .get(protectedRouteMiddleware, controllers.privateProfile);
+
 router.route('/session/logout/:id')
   .get(authRouteMiddleware, controllers.sessionLogout);
 

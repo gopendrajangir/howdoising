@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Sessions from "./sessions";
+import Sessions from "components/Settings/sessions";
+import PersonalInfo from "./personal";
 
 import SvgSprite from "assets/images/sprite.svg";
 
@@ -31,6 +32,7 @@ class Settings extends React.Component {
 
   render() {
     const { current, selectedClass } = this.state;
+    const { uid } = this.props;
 
     return (
       <div className="settings-container">
@@ -85,12 +87,13 @@ class Settings extends React.Component {
           <div className="settings-main">
             {current === 1 && (
               <div className="settings-main-content">
-                <h1>Personal Info</h1>
+                <h1>Its a server protected route</h1>
+                <PersonalInfo />
               </div>
             )}
             {current === 2 && (
               <div className="settings-main-content">
-                <Sessions />
+                <Sessions uid={uid} />
               </div>
             )}
           </div>

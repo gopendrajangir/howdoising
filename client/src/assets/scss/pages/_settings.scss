@@ -102,36 +102,62 @@
             }
             
             &-session {
+              @include flexRowCenter;
+              justify-content: flex-start;
               padding: 2rem 2.3rem;
               border-bottom: 1px solid $color-white-3;
-              
-              & > * {
-                margin-bottom: 1rem;
-              }
 
-              &-browser {
-                @include flexRowCenter;
-                justify-content: flex-start;
+              &-details {
+                flex: 1;
 
-                &-icon {
-                  width: 3rem;
-                  height: 3rem;
-                  margin-right: 1rem;
+                & > * {
+                  margin-bottom: 1rem;
+                }
+  
+                &-browser {
+                  @include flexRowCenter;
+                  justify-content: flex-start;
+  
+                  &-icon {
+                    width: 3rem;
+                    height: 3rem;
+                    margin-right: 1rem;
+                  }
+                }
+                
+                &-os {
+                  padding-left: 3.8rem;
+                }
+  
+                &-device {
+                  @include flexRowCenter;
+                  justify-content: flex-start;
+  
+                  &-icon {
+                    width: 3rem;
+                    height: 3rem;
+                    margin-right: 1rem;
+                  }
                 }
               }
-              
-              &-os {
-                padding-left: 3.8rem;
-              }
+                
+              &-options {
+                @include flexColumnCenter;
 
-              &-device {
-                @include flexRowCenter;
-                justify-content: flex-start;
+                button {
+                  cursor: pointer;
+                  @include defaultInput;
+                  background-color: $color-red;
+                  color: white;
+                  font-weight: 600;
+                  padding: 1.1rem 1.2rem;
+                  letter-spacing: .5px;
+                  border-radius: 5px;
+                  border-bottom: 2px solid $color-grey-light-1;
 
-                &-icon {
-                  width: 3rem;
-                  height: 3rem;
-                  margin-right: 1rem;
+                  &:active {
+                    border-bottom: none;
+                  }
                 }
               }
             }
