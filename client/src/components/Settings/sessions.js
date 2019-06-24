@@ -56,7 +56,8 @@ export default class Sessions extends React.Component {
   }
 
   removeSession(oid) {
-    return () => {
+    return event => {
+      event.target.disabled = true;
       window
         .fetch(`/apis/users/session/logout/${oid}`)
         .then(results => {
