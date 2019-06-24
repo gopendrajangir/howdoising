@@ -19,7 +19,7 @@ module.exports = (req, res) => {
       }
 
       let mySessions = [];
-      const mySessionId = req.sessionId;
+      const mySessionId = req.sessionID;
 
       documents.map((document) => {
         const session = JSON.parse(document.session);
