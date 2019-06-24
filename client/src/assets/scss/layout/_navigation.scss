@@ -2,18 +2,46 @@
   height: $navigation-bar-height;
   padding: 0rem 4rem;
 
-
   @include flexRowCenter;
   justify-content: space-between;
-
+  
   a {
     color: $color-white;
     text-decoration: none;
   }
-
+  
   div.app-navigation-pages {
     & > a {
-      margin-left: 4rem;
+      position: relative;
+      margin-left: 2rem;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: .5px;
+      padding: .5rem 2rem;
+      color: $color-white;
+      transition: .3s;
+      
+      &::before {
+        transition: .3s;
+        z-index: -2;
+        display: block;
+        content: "";
+        position: absolute;
+        left: 0rem;
+        top: -1px;
+        width: 100%;
+        height: 0%;
+        background-color: $color-white;
+        transform: skewY(-3deg);
+      }
+      
+      &:hover {
+        color: $color-grey-dark-2;
+        
+        &::before {
+          height: 110%;
+        }
+      }
     }
   }
 
@@ -185,10 +213,10 @@
           padding: 1.5rem;
           padding-bottom: 2rem;
           box-shadow: 0 0 1rem $color-grey-dark-2;
-          border-radius: 5px;
+          border-radius: 3px;
           position: absolute;
-          top: $navigation-bar-height - 1.5rem;
-          left: 0px;
+          top: $navigation-bar-height - 3rem;
+          // left: 0px;
           
           @include flexColumnCenter;
           align-items: flex-start;

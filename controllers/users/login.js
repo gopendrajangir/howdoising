@@ -1,7 +1,5 @@
 const useragent = require('express-useragent');
 const passport = require('passport');
-const mongoose = require('./../../bin/www').mongoose;
-const db = mongoose.connection.db;
 
 module.exports = (req, res) => {
   passport.authenticate('local', (err, user, info) => {
@@ -22,9 +20,17 @@ module.exports = (req, res) => {
       const ua = useragent.parse(source);
 
       const sessionUser = {
-        sid: req.sessionID,
+        uid: user._id,
         platform: ua.platform,
         os: ua.os,
+        devices: {
+          Desktop: ua.isDesktop,
+          Mobile: ua.isMobile,
+          Desktop: ua.isDesktop,
+          Tablet: ua.isTablet,
+          iPod: ua.isiPod,
+          iPad: ua.isiPad
+        },
         browser: ua.browser,
         version: ua.version
       }

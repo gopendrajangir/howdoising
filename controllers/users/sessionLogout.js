@@ -24,6 +24,5 @@ module.exports = (req, res) => {
     res.status(200).json({
       msg: "Session logged out successfully"
     });
-
   });
 }

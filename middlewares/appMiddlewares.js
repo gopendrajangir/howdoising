@@ -12,6 +12,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 const express = require('express');
 
+const useragent = require('express-useragent');
+
 const mongooseStore = new MS({
   modelName: 'session'
 });
@@ -68,6 +70,7 @@ module.exports = (app) => {
   });
 
   app.use((req, res, next) => {
+
     const db = mongoose.connection.db;
 
     const sessionID = req.sessionID;
@@ -101,6 +104,6 @@ module.exports = (app) => {
     app.use(express.static(path.resolve(__dirname, '../client/build')));
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
-    })
+    });
   }
 }

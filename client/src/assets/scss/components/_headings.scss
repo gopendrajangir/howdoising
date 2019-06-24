@@ -1,6 +1,7 @@
 .route-heading {
-  @include flexRowCenter;
-  padding: 2rem 0rem;
+  @include flexColumnCenter;
+  padding: 1.5rem 0rem;
   letter-spacing: 1px;
   color: $color-white;
+  text-shadow: 2px 2px 1px $color-grey-light-1;
 }

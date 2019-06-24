@@ -1,8 +1,143 @@
 .settings-container {
   width: 100%;
-
+  
   .settings {
+    @include flexRowCenter;
     background-color: $color-white;
-    height: 60rem;
+    height: 45rem;
+    
+    & > * {
+      padding-top: 2rem;
+    }
+
+    &-navigation {
+      width: 28rem;
+      height: 100%;
+
+      &-links {
+        @include flexColumnCenter;
+        justify-content: flex-start;
+        width: 100%;
+        height: 100%;
+        padding: 0rem;
+
+        &-link {
+          @include flexRowCenter;
+          font-size: 1.8rem;
+          height: 4.6rem;
+          width: 100%;
+       
+          &-selected {
+            background-color: rgba($color-blue-dark, 0.1) !important;
+            color: $color-blue-dark !important;
+
+            svg {
+              fill: $color-blue-dark !important;
+            }
+          }
+          
+          &-button {
+            transition: .3s;
+            @include flexRowCenter;
+            @include defaultInput;
+            color: $color-grey-dark-2;
+            background-color: transparent;
+            justify-content: flex-start;
+            padding-left: 3rem;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            border-top-right-radius: 5rem;
+            border-bottom-right-radius: 5rem;
+            
+            &:hover {
+              background-color: $color-white-2;
+            }
+            
+            &-icon {
+              svg {
+                width: 1.4rem;
+                height: 1.4rem;
+                fill: $color-grey-dark-2;
+              }
+            }
+            
+            &-title {
+              margin-left: 1.5rem;
+              font-size: 1.4rem;
+              font-weight: 600;
+              letter-spacing: .4px;
+            }
+          }
+        }
+      }
+    }
+
+    &-main {
+      flex: 1;
+      height: 100%;
+      padding-left: 4rem;
+
+      &-content {
+        @include flexColumnCenter;
+        justify-content: flex-start;
+        width: 100%;
+        height: 100%;
+
+        .sessions-container {
+          border: 1px solid $color-white-3;
+          border-radius: 5px;
+          width: 50rem;
+          box-shadow: 0 0 .7rem $color-white-3;
+          overflow: hidden;
+
+          .sessions {
+            width: 100%;
+            
+            &-heading {
+              padding: 1rem 1.5rem;
+              font-size: 2.5rem;
+              background-color: $color-blue-light;
+              color: $color-white;
+            }
+            
+            &-session {
+              padding: 2rem 2.3rem;
+              border-bottom: 1px solid $color-white-3;
+              
+              & > * {
+                margin-bottom: 1rem;
+              }
+
+              &-browser {
+                @include flexRowCenter;
+                justify-content: flex-start;
+
+                &-icon {
+                  width: 3rem;
+                  height: 3rem;
+                  margin-right: 1rem;
+                }
+              }
+              
+              &-os {
+                padding-left: 3.8rem;
+              }
+
+              &-device {
+                @include flexRowCenter;
+                justify-content: flex-start;
+
+                &-icon {
+                  width: 3rem;
+                  height: 3rem;
+                  margin-right: 1rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

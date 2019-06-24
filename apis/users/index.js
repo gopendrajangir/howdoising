@@ -2,17 +2,22 @@ const router = require('express').Router();
 const controllers = require('./../../controllers');
 const uploadImage = require('./../../middlewares/multer').uploadImage;
 const inputValidationMiddleware = require('./../../middlewares/inputValidationMiddleware');
+const authRouteMiddleware = require('../../middlewares/authMiddleware').authRouteMiddleware;
+const protectedRouteMiddleware = require('../../middlewares/authMiddleware').protectedRouteMiddleware;
 
 router.route('/register')
-  .post(uploadImage.single('image'), controllers.register);
+  .post(authRouteMiddleware, uploadImage.single('image'), controllers.register);
 
 router.route('/login')
-  .post(inputValidationMiddleware, controllers.login);
+  .post(authRouteMiddleware, inputValidationMiddleware, controllers.login);
 
 router.route('/logout')
-  .get(controllers.logout);
+  .get(protectedRouteMiddleware, controllers.logout);
+
+router.route('/sessions')
+  .get(protectedRouteMiddleware, controllers.sessions);
 
 router.route('/session/logout/:id')
-  .get(controllers.sessionLogout);
+  .get(authRouteMiddleware, controllers.sessionLogout);
 
 module.exports = router;
