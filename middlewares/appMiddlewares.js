@@ -90,8 +90,14 @@ module.exports = (app) => {
 
       if(!session.session) {
         req.logout();
-        return res.status(200).json({
-          msg: "You logged out successfully"
+        req.session.destroy((err) => {
+          if(err) {
+            console.log("Error in session destroy at logout route", err);
+            return res.status(500).send("Internal Server Error");
+          }
+          return res.status(200).json({
+            msg: "You logged out successfully"
+          });
         });
       }
       return next();
