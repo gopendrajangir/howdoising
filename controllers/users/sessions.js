@@ -26,9 +26,9 @@ module.exports = (req, res) => {
         if( session && session.passport && session.passport.user ) {
           if(session.passport.user.uid === req.user.uid) {
             if(document.sid === mySessionId) {
-              session.mySession = true;
+              session.passport.user.mySession = true;
             } else {
-              session.mySession = false;
+              session.passport.user.mySession = false;
             }
             delete document.sid;
             delete session.cookie;
