@@ -19,11 +19,17 @@ module.exports = (req, res) => {
       }
 
       let mySessions = [];
+      const mySessionId = req.sessionId;
 
       documents.map((document) => {
         const session = JSON.parse(document.session);
         if( session && session.passport && session.passport.user ) {
           if(session.passport.user.uid === req.user.uid) {
+            if(document.sid === mySessionId) {
+              session.mySession = true;
+            } else {
+              session.mySession = false;
+            }
             delete document.sid;
             delete session.cookie;
             mySessions.push({ oid: document._id, session: session.passport.user});

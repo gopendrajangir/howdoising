@@ -139,7 +139,7 @@ export default class Sessions extends React.Component {
                     </div>
                   </div>
                   <div className="sessions-session-options">
-                    {uid !== session.session.uid ? (
+                    {session.session.mySession ? (
                       <button
                         type="button"
                         onClick={this.removeSession(session.oid)}
