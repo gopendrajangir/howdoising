@@ -137,6 +137,11 @@ export default class Sessions extends React.Component {
                       />
                       <span className="sessions-session-details-device-title">
                         {session.session.device}
+                        {session.session.mySession ? (
+                          <span className="sessions-session-details-device-title-current">
+                            This Device
+                          </span>
+                        ) : null}
                       </span>
                     </div>
                   </div>

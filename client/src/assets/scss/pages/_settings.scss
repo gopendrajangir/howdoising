@@ -138,6 +138,16 @@
                     height: 3rem;
                     margin-right: 1rem;
                   }
+
+                  &-title {
+                    &-current {
+                      // border: 1px solid $color-green;
+                      margin-left: 1rem;
+                      letter-spacing: .5px;
+                      font-weight: 600;
+                      color: $color-green;
+                    }
+                  }
                 }
               }
                 
@@ -157,7 +167,14 @@
 
                   &:active {
                     border-bottom: none;
+                    background-color: rgba($color-red, 0.9);
                   }
+
+                  &[disabled=disabled], &:disabled {
+                    border-bottom: none;
+                    background-color: rgba($color-red, 0.7);
+                  }
+                  
                 }
               }
             }
