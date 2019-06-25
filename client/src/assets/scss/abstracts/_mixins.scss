@@ -25,9 +25,9 @@
 }
 
 @mixin gradientBlue {
-	background: $color-blue-light;
-  background: -webkit-linear-gradient(to right, $color-blue-dark, $color-blue-light);
-	background: linear-gradient(to right, $color-blue-dark, $color-blue-light);
+	background: $color-blue-light-1;
+  background: -webkit-linear-gradient(to right, $color-blue-dark-1, $color-blue-light-1);
+	background: linear-gradient(to right, $color-blue-dark-1, $color-blue-light-1);
 	background-repeat: no-repeat;
 }
 

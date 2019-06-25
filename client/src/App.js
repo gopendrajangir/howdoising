@@ -23,7 +23,8 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/sing" exact component={Sing} />
-          <Route path="/settings" exact component={Settings} />
+          <Route path="/settings/personal" exact component={Settings} />
+          <Route path="/settings/security" exact component={Settings} />
           <Route path="/auditorium" exact component={Auditorium} />
           <Route path="/logout" exact component={Logout} />
         </Switch>

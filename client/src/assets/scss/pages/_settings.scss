@@ -26,17 +26,17 @@
           font-size: 1.8rem;
           height: 4.6rem;
           width: 100%;
-       
+          
           &-selected {
-            background-color: rgba($color-blue-dark, 0.1) !important;
-            color: $color-blue-dark !important;
-
+            background-color: rgba($color-blue-dark-1, 0.1) !important;
+            color: $color-blue-dark-1 !important;
+            
             svg {
-              fill: $color-blue-dark !important;
+              fill: $color-blue-dark-1 !important;
             }
           }
           
-          &-button {
+          &-anchor {
             transition: .3s;
             @include flexRowCenter;
             @include defaultInput;
@@ -49,6 +49,7 @@
             height: 100%;
             border-top-right-radius: 5rem;
             border-bottom-right-radius: 5rem;
+            text-decoration: none;
             
             &:hover {
               background-color: $color-white-2;
@@ -97,7 +98,7 @@
             &-heading {
               padding: 1rem 1.5rem;
               font-size: 2.5rem;
-              background-color: $color-blue-light;
+              background-color: $color-blue-light-1;
               color: $color-white;
             }
             
@@ -141,9 +142,10 @@
 
                   &-title {
                     &-current {
-                      // border: 1px solid $color-green;
+                      text-transform: uppercase;
                       margin-left: 1rem;
                       letter-spacing: .5px;
+                      font-size: 1.5rem;
                       font-weight: 600;
                       color: $color-green;
                     }
@@ -174,7 +176,6 @@
                     border-bottom: none;
                     background-color: rgba($color-red, 0.7);
                   }
-                  
                 }
               }
             }

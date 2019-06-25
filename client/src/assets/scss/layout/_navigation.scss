@@ -170,7 +170,7 @@
           }
           
           &-name {
-            color: $color-blue-dark;
+            color: $color-blue-dark-1;
             margin-right: 0rem;
             margin-top: -3px;
           }
@@ -196,7 +196,7 @@
             & > svg {
               width: 2.5rem;
               height: 2.5rem;
-              fill: $color-blue-dark;
+              fill: $color-blue-dark-1;
             }
           }
         }
@@ -262,7 +262,7 @@
   
         &:first-child {
           background-color: $color-white;
-          color: $color-blue-light;
+          color: $color-blue-light-1;
         }
   
         display: inline-block;
@@ -277,7 +277,7 @@
         
         &:hover {
           background-color: white;
-          color: $color-blue-light;
+          color: $color-blue-light-1;
         }
         
         &:active {

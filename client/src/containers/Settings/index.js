@@ -1,22 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Sessions from "components/Settings/sessions";
 import PersonalInfo from "./personal";
 
 import SvgSprite from "assets/images/sprite.svg";
 
 class Settings extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      current: 1,
-      selectedClass: "settings-navigation-links-link-selected"
-    };
-
-    this.selectSettingsLink = this.selectSettingsLink.bind(this);
-  }
-
   componentDidMout() {
     const { history, isLoggedIn } = this.props;
     if (!isLoggedIn) {
@@ -24,16 +14,9 @@ class Settings extends React.Component {
     }
   }
 
-  selectSettingsLink(current) {
-    return () => {
-      this.setState({ current });
-    };
-  }
-
   render() {
-    const { current, selectedClass } = this.state;
-    const { uid } = this.props;
-
+    const { location } = this.props;
+    const selectedClass = "settings-navigation-links-link-selected";
     return (
       <div className="settings-container">
         <h1 className="route-heading">
@@ -43,55 +26,55 @@ class Settings extends React.Component {
           <div className="settings-navigation">
             <div className="settings-navigation-links">
               <div className="settings-navigation-links-link">
-                <button
+                <Link
+                  to="/settings/personal"
                   className={
-                    current === 1
-                      ? `settings-navigation-links-link-button ${selectedClass}`
-                      : "settings-navigation-links-link-button"
+                    location.pathname === "/settings/personal"
+                      ? `settings-navigation-links-link-anchor ${selectedClass}`
+                      : "settings-navigation-links-link-anchor"
                   }
                   type="button"
-                  onClick={this.selectSettingsLink(1)}
                 >
-                  <span className="settings-navigation-links-link-button-icon">
+                  <span className="settings-navigation-links-link-anchor-icon">
                     <svg>
                       <use xlinkHref={`${SvgSprite}#icon-user`} />
                     </svg>
                   </span>
-                  <span className="settings-navigation-links-link-button-title">
+                  <span className="settings-navigation-links-link-anchor-title">
                     Personal Info
                   </span>
-                </button>
+                </Link>
               </div>
               <div className="settings-navigation-links-link">
-                <button
+                <Link
+                  to="/settings/security"
                   className={
-                    current === 2
-                      ? `settings-navigation-links-link-button ${selectedClass}`
-                      : "settings-navigation-links-link-button"
+                    location.pathname === "/settings/security"
+                      ? `settings-navigation-links-link-anchor ${selectedClass}`
+                      : "settings-navigation-links-link-anchor"
                   }
                   type="button"
-                  onClick={this.selectSettingsLink(2)}
                 >
-                  <span className="settings-navigation-links-link-button-icon">
+                  <span className="settings-navigation-links-link-anchor-icon">
                     <svg>
                       <use xlinkHref={`${SvgSprite}#icon-lock-closed`} />
                     </svg>
                   </span>
-                  <span className="settings-navigation-links-link-button-title">
+                  <span className="settings-navigation-links-link-anchor-title">
                     Security
                   </span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
           <div className="settings-main">
-            {current === 1 && (
+            {location.pathname === "/settings/personal" && (
               <div className="settings-main-content">
                 <h1>Its a server protected route</h1>
                 <PersonalInfo />
               </div>
             )}
-            {current === 2 && (
+            {location.pathname === "/settings/security" && (
               <div className="settings-main-content">
                 <Sessions />
               </div>

@@ -122,7 +122,7 @@ const ProtectedRoutes = ({ user }) => {
           </Link>
           <Link
             className="app-navigation-auth-protected-profile-nav-link"
-            to="/settings"
+            to="/settings/personal"
           >
             <span className="app-navigation-auth-protected-profile-nav-link-icon">
               <svg>

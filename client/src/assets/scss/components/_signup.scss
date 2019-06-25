@@ -114,7 +114,7 @@
             }
             
             &:focus {
-              border-bottom: 3px solid $color-blue-dark;
+              border-bottom: 3px solid $color-blue-dark-1;
             }
           }
         }
@@ -232,10 +232,6 @@
           button {
             letter-spacing: .6px;
             padding: 1.5rem 5rem;
-            
-            &:active {
-              padding: 1.5rem 4.9rem;
-            }
           }
         }
 
@@ -246,7 +242,7 @@
 
           a {
             text-decoration: none;
-            color: $color-blue-dark;
+            color: $color-blue-dark-1;
 
             &:hover {
               text-decoration: underline;
@@ -282,10 +278,10 @@
               display: none;
 
               &:checked + label span{
-                border: 2px solid $color-blue-dark;
+                border: 2px solid $color-blue-dark-1;
                 
                 svg {
-                  background-color: $color-blue-dark;
+                  background-color: $color-blue-dark-1;
                   width: 2rem;
                   height: 2rem;
                   padding: 2px;
@@ -352,7 +348,7 @@
                 width: 2rem;
                 height: 2rem;
                 border-radius: 50%;
-                border: 2px solid $color-blue-dark;
+                border: 2px solid $color-blue-dark-1;
                 transition: .4s;
                 background-color: $color-white;
 
@@ -364,7 +360,7 @@
                   border-radius: 50%;
                   width: 0px;
                   height: 0px;
-                  background-color: $color-blue-dark;
+                  background-color: $color-blue-dark-1;
                 }
               }
             }
