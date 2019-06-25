@@ -34,6 +34,9 @@ const UserSchema = new Schema({
   },
   image: {
     type: Schema.Types.Mixed
+  },
+  privacy: {
+    type: Schema.Types.Mixed
   }
 });
 

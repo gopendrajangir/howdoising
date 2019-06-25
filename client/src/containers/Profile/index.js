@@ -1,14 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
-const Profile = ({ history, isLoggedIn }) => {
-  if (!isLoggedIn) {
-    return <div>{history.push("/login")}</div>;
-  }
+const Profile = ({ isLoggedIn }) => {
   return (
     <div className="profile-container">
-      <h1 class="route-heading">Profile</h1>
+      {!isLoggedIn ? (
+        <Redirect to="/login" />
+      ) : (
+        <h1 className="route-heading">Profile</h1>
+      )}
     </div>
   );
 };
@@ -21,4 +22,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Profile));
+export default connect(mapStateToProps)(Profile);

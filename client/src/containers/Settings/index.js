@@ -41,7 +41,7 @@ class Settings extends React.Component {
                     </svg>
                   </span>
                   <span className="settings-navigation-links-link-anchor-title">
-                    Personal Info
+                    Personal &amp; Privacy
                   </span>
                 </Link>
               </div>
@@ -70,7 +70,6 @@ class Settings extends React.Component {
           <div className="settings-main">
             {location.pathname === "/settings/personal" && (
               <div className="settings-main-content">
-                <h1>Its a server protected route</h1>
                 <PersonalInfo />
               </div>
             )}

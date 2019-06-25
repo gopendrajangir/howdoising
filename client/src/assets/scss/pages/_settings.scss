@@ -96,17 +96,23 @@
             width: 100%;
             
             &-heading {
-              padding: 1rem 1.5rem;
-              font-size: 2.5rem;
-              background-color: $color-blue-light-1;
-              color: $color-white;
+              padding: 1.2rem 1.5rem;
+              font-size: 2.1rem;
+              letter-spacing: 1px;
+              color: $color-grey-light-2;
+              border-bottom: 1px solid $color-white-3;
             }
             
             &-session {
               @include flexRowCenter;
               justify-content: flex-start;
+              align-items: flex-end;
               padding: 2rem 2.3rem;
               border-bottom: 1px solid $color-white-3;
+              height: 6rem;
+              overflow: hidden;
+              padding-bottom: .8rem;
+              transition: .5s;
 
               &-details {
                 flex: 1;
@@ -141,13 +147,40 @@
                   }
 
                   &-title {
-                    &-current {
-                      text-transform: uppercase;
-                      margin-left: 1rem;
-                      letter-spacing: .5px;
-                      font-size: 1.5rem;
-                      font-weight: 600;
-                      color: $color-green;
+                    flex:1;
+                  }
+
+                  &-current {
+                    text-transform: uppercase;
+                    margin-left: 1rem;
+                    letter-spacing: .5px;
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: $color-green;
+                  }
+
+                  &-dropdown-icon {
+                    @include flexRowCenter;
+                    
+                    label {
+                      @include flexRowCenter;
+                      
+                      svg {
+                        cursor: pointer;
+                        margin-left: 1rem;
+                        fill: $color-grey-dark-1;
+                        height: 3rem;
+                        width: 3rem;
+                        transition: .3s;
+                        
+                        &:active {
+                          fill: $color-grey-dark-3;
+                        }
+                      }
+                    }
+
+                    & > input:checked + label > svg{
+                      transform: rotateZ(-180deg);
                     }
                   }
                 }
@@ -175,6 +208,166 @@
                   &[disabled=disabled], &:disabled {
                     border-bottom: none;
                     background-color: rgba($color-red, 0.7);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .private-profile-container {
+          width: 100%;
+          .private-profile {
+            width: 100%;
+            @include flexRowCenter;
+            &-details {
+              width: 60%;
+              border: 1px solid $color-white-3;
+              border-radius: 1rem;
+              box-shadow: 0px 0px .5rem $color-white-3;
+
+              &-photo {
+                width: 100%;
+                @include flexRowCenter;
+                align-items: stretch;
+
+                &-content {
+                  @include flexRowCenter;
+                  justify-content: flex-start;
+                  flex: 1;
+                  padding: 2rem;
+                  padding-left: 3rem;
+                  
+                  &-image {
+                    @include flexRowCenter;
+                    background-color: $color-white-3;
+                    height: 8rem;
+                    width: 8rem;
+                    border-radius: 50%;
+                    overflow: hidden;
+
+                    & > img {
+                      height: 100%;
+                    }
+                  }
+                }
+
+                &-edit {
+                  @include flexRowCenter;
+                  padding: 3rem;
+
+                  &-button {
+                    @include flexRowCenter;
+                    position: relative;
+                    cursor: pointer;
+                    @include defaultInput;
+                    background-color: transparent;
+                    border: none;
+                    padding: 0rem;
+                    border-radius: 50%;
+                    @include flexRowCenter;
+                    transition: .3s;
+                    
+                    &-icon {
+                      @include flexRowCenter;
+
+                      svg {
+                        width: 2rem;
+                        height: 2rem;
+                        fill: $color-grey-dark-1;
+
+                        &:active {
+                          fill: $color-grey-dark-3;
+                        }
+                      }
+                    }
+                    
+                    &-title {
+                      color: $color-blue-light-2;
+                      font-size: 1.2rem;
+                      letter-spacing: .3px;
+                      font-weight: 600;
+                      margin-left: 1rem;
+                    }
+                  }
+                }
+                
+                &-privacy {
+                  @include flexColumnCenter;
+                  padding: 0rem 2rem;
+
+                  select {
+                    cursor: pointer;
+                    padding: .7rem;
+                    -webkit-appearance: scrollbarbutton-down;
+                    -moz-appearance: scrollbarbutton-down;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -webkit-padding-end: 1rem;
+                    -moz-padding-end: 1rem;
+                    -webkit-padding-start: 1rem;
+                    -moz-padding-start: 1rem;
+                    outline: none;
+                    border: 1px solid $color-grey-light-2;
+                    color: $color-grey-light-3;
+                    border-radius: .5rem;
+                    font-size: 1.4rem;
+                    letter-spacing: .6px;
+                    font-weight: 500;
+                  }
+                }
+              }
+
+              &-name, &-email, &-level, &-style {
+                @include flexRowCenter;
+                border-top: 1px solid $color-white-3;
+                width: 100%;
+                align-items: stretch;
+                padding: .5rem 0rem;
+
+                &-title {
+                  @include flexRowCenter;
+                  letter-spacing: .7px;
+                  width: 16rem;
+                  font-weight: 600;  
+                }
+
+                &-value {
+                  @include flexRowCenter;
+                  justify-content: flex-start;
+                  padding-left: 5rem;
+                  letter-spacing: .5px;
+                  flex: 1;
+                }
+                
+                &-edit {
+                  padding: 2rem 3rem;
+                  @include flexRowCenter;
+
+                  &-button {
+                    @include flexRowCenter;
+                    position: relative;
+                    cursor: pointer;
+                    @include defaultInput;
+                    background-color: transparent;
+                    border: none;
+                    padding: 0rem;
+                    border-radius: 50%;
+                    @include flexRowCenter;
+                    
+                    &-icon {
+                      @include flexRowCenter;
+
+                      svg {
+                        width: 2rem;
+                        height: 2rem;
+                        fill: $color-grey-dark-1;
+
+                        &:active {
+                          fill: $color-grey-dark-3;
+                        }
+                      }
+                    }
                   }
                 }
               }

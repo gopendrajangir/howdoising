@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { logOut } from "actions/auth";
 
-const Logout = ({ history, isLoggedIn, logOutUser }) => {
-  if (!isLoggedIn) {
-    return <div>{history.push("/profile")}</div>;
-  } else {
+class Logout extends React.Component {
+  componentDidMount() {
+    const { logOutUser } = this.props;
     window
       .fetch("/apis/users/logout")
       .then(result => {
@@ -14,8 +13,6 @@ const Logout = ({ history, isLoggedIn, logOutUser }) => {
       })
       .then(data => {
         if (!data.errors) {
-          console.log(data.msg);
-          history.push("/login");
           logOutUser();
         }
       })
@@ -23,9 +20,13 @@ const Logout = ({ history, isLoggedIn, logOutUser }) => {
         console.log(err);
       });
   }
-
-  return <div>Logout</div>;
-};
+  render() {
+    const { isLoggedIn } = this.props;
+    return (
+      <div>{!isLoggedIn ? <Redirect to="/login" /> : <span>Logout</span>}</div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {

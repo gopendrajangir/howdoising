@@ -11,6 +11,9 @@ import TabletImage from "assets/images/devices/tablet.jpg";
 import iPodImage from "assets/images/devices/ipod.png";
 import iPadImage from "assets/images/devices/ipad.png";
 
+import SvgSprite from "assets/images/sprite.svg";
+import $ from "jquery";
+
 export default class Sessions extends React.Component {
   constructor(props) {
     super(props);
@@ -81,6 +84,30 @@ export default class Sessions extends React.Component {
     this.fetchSessions();
   }
 
+  componentDidUpdate() {
+    (() => {
+      const inputs = $("#dropdown-input");
+      const sessions = $(".sessions-session");
+      inputs.map((index, input) => {
+        $(input).change(function() {
+          console.log($(this));
+          if ($(this).is(":checked")) {
+            $(sessions[index]).css({
+              padding: "2rem 2.3rem",
+              height: "16rem"
+            });
+          } else {
+            $(sessions[index]).css({
+              paddingBottom: "0.7rem",
+              height: "6rem"
+            });
+          }
+        });
+        return true;
+      });
+    })();
+  }
+
   render() {
     const { sessions, error } = this.state;
 
@@ -137,11 +164,21 @@ export default class Sessions extends React.Component {
                       />
                       <span className="sessions-session-details-device-title">
                         {session.session.device}
-                        {session.session.mySession ? (
-                          <span className="sessions-session-details-device-title-current">
-                            This Device
-                          </span>
-                        ) : null}
+                      </span>
+                      {session.session.mySession ? (
+                        <span className="sessions-session-details-device-current">
+                          This Device
+                        </span>
+                      ) : null}
+                      <span className="sessions-session-details-device-dropdown-icon">
+                        <input hidden type="checkbox" id="dropdown-input" />
+                        <label htmlFor="dropdown-input">
+                          <svg>
+                            <use
+                              xlinkHref={`${SvgSprite}#icon-cheveron-down`}
+                            />
+                          </svg>
+                        </label>
                       </span>
                     </div>
                   </div>

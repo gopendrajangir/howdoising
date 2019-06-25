@@ -65,8 +65,13 @@ module.exports = (req, res) => {
             });
           }
           
+          data.privacy = {
+            email: "Private",
+            image: "Public"
+          };
+
           const newUser = new User(data);
-    
+
           newUser.save((err, user) => {
             if(err) {
               console.log("Error in new user save at register route", err);
