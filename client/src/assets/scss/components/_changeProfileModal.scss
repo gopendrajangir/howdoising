@@ -6,8 +6,49 @@
   height: 100%;
   background-color: rgba($color-white, 1);
   
+  &-footer {
+    width: 100%;
+    padding: 3rem;
+    @include flexRowCenter;
+    justify-content: flex-end;
+
+    button {
+      @include flexRowCenter;
+      @include defaultInput;
+      color: white;
+      padding: 1.1rem 1.1rem;
+      font-weight: 600;
+      letter-spacing: .7px;
+      width: 9rem;
+      border-radius: .5rem;
+      margin-left: 3rem;
+      cursor: pointer;
+      transition: .3s;
+      transform: translateY(-2px);
+      box-shadow: 0 3px 4px $color-grey-light-2;
+      
+      &:active {
+        transform: translateY(0px);
+        box-shadow: 0 0 0 $color-grey-light-2;
+      }
+      
+      &[disabled=disabled], &:disabled {
+        transform: translateY(0px);
+        box-shadow: 0 0 0 $color-grey-light-2;
+        background-color: rgba($color-blue-light-3, 0.7);
+      }
+    }
+
+    &-button-cancel {
+      background-color: $color-red;
+    }
+
+    &-button-save {
+      background-color: $color-blue-light-3;
+    }
+  }
   
-  .change-form-photo {
+  .change-form-image {
     @include flexColumnCenter;
     justify-content: space-between;
     width: 100%;
@@ -25,7 +66,7 @@
         border: 1px solid $color-grey-light-1;
         overflow: hidden;
 
-        label.choose-photo {
+        label.choose-image {
           position: relative;
           width: 25rem;
           height: 25rem;
@@ -67,46 +108,90 @@
         }
       }
     }
+  }
+  
+  .confirm-image-privacy {
+    @include flexColumnCenter;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
 
-    &-footer {
-      width: 100%;
-      padding: 3rem;
+    &-message {
       @include flexRowCenter;
-      justify-content: flex-end;
+      flex: 1;
+      text-align: center;
+      padding: 4rem;
+      font-size: 2.2rem;
+    }
+  }
+  .change-form-display-name {
+    @include flexColumnCenter;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    
+    &-content {
+      @include flexColumnCenter;
+      width: 100%;
+      flex: 1;
+      padding: 10rem;
+
+      &-error {
+        width: 100%;
+        margin-bottom: 1rem;
+        
+        p {
+          padding: .3rem;
+          padding-left: .5rem;
+          width: 100%;
+          font-size: 1.4rem;
+          line-height: 1.2rem;
+          color: $color-red;
+          border-radius: .2rem;
+          font-weight: 600;
+          letter-spacing: .6px;
+        }
+      }
   
-      button {
+      &-name {
+        position: relative;
+        height: 5rem;
+        width: 100%;
+  
         @include flexRowCenter;
-        @include defaultInput;
-        color: white;
-        padding: 1.1rem 1.1rem;
-        font-weight: 600;
-        letter-spacing: .7px;
-        width: 9rem;
-        border-radius: .5rem;
-        margin-left: 3rem;
-        cursor: pointer;
-        transition: .3s;
-        transform: translateY(-2px);
-        box-shadow: 0 3px 4px $color-grey-light-2;
+        justify-content: flex-start;
         
-        &:active {
-          transform: translateY(0px);
-          box-shadow: 0 0 0 $color-grey-light-2;
-        }
-        
-        &[disabled=disabled], &:disabled {
-          transform: translateY(0px);
-          box-shadow: 0 0 0 $color-grey-light-2;
-          background-color: rgba($color-blue-light-3, 0.7);
-        }
-      }
+        svg {
+          position: absolute;
+          fill: $color-grey-light-2;
+          width: 4rem;
+          height: 1.4rem;
+          margin-top: -2px;
+        }          
   
-      &-button-cancel {
-        background-color: $color-red;
-      }
-  
-      &-button-save {
-        background-color: $color-blue-light-3;
+        & > input {
+          @include defaultInput;
+          border-radius: 3px;
+          padding-left: 3.5rem;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          color: $color-grey-dark-3;
+          padding-top: .2rem;
+          font-size: 1.4rem;
+          letter-spacing: .4px;
+          background-color: rgba($color-white-3, 1);
+          border-bottom: 3px solid transparent;
+            
+          &::placeholder {
+            letter-spacing: .7px;
+            color: $color-grey-dark-2;
+          }
+          
+          &:focus {
+            border-bottom: 3px solid $color-blue-dark-1;
+          }
+        }
       }
     }
   }

@@ -11,7 +11,7 @@ let imageData;
 const onFileChange = e => {
   [imageData] = e.target.files;
   const userImg = document.querySelector(
-    ".change-form-photo-pic .choose-photo-image"
+    ".change-form-image-pic .choose-image-image"
   );
   const reader = new FileReader();
   e.persist();
@@ -22,21 +22,21 @@ const onFileChange = e => {
   reader.readAsDataURL(e.target.files[0]);
 };
 
-const ChangePhotoForm = ({ isSubmitting, closeModal, isLoggedIn, imageId }) => {
+const ChangeImageForm = ({ isSubmitting, closeModal, isLoggedIn, imageId }) => {
   return (
-    <Form className="change-form-photo">
-      <div className="change-form-photo-pic">
-        <div className="change-form-photo-pic-wrapper">
-          <label htmlFor="user-photo" className="choose-photo">
+    <Form className="change-form-image">
+      <div className="change-form-image-pic">
+        <div className="change-form-image-pic-wrapper">
+          <label htmlFor="user-image" className="choose-image">
             <img
-              className="choose-photo-image"
+              className="choose-image-image"
               src={`/apis/images/${imageId}`}
               alt="user"
               onError={event => {
                 event.target.src = UserImage;
               }}
             />
-            <label htmlFor="user-photo" className="choose-photo-cover">
+            <label htmlFor="user-image" className="choose-image-cover">
               <svg>
                 <use xlinkHref={`${SvgSprite}#icon-camera`} />
               </svg>
@@ -46,14 +46,14 @@ const ChangePhotoForm = ({ isSubmitting, closeModal, isLoggedIn, imageId }) => {
             hidden
             onChange={onFileChange}
             type="file"
-            id="user-photo"
+            id="user-image"
             name="image"
           />
         </div>
       </div>
-      <div className="change-form-photo-footer">
+      <div className="private-profile-details-change-footer">
         <button
-          className="change-form-photo-footer-button-cancel"
+          className="private-profile-details-change-footer-button-cancel"
           type="button"
           onClick={closeModal}
         >
@@ -61,7 +61,7 @@ const ChangePhotoForm = ({ isSubmitting, closeModal, isLoggedIn, imageId }) => {
         </button>
         <button
           disabled={isSubmitting}
-          className="change-form-photo-footer-button-save"
+          className="private-profile-details-change-footer-button-save"
           type="submit"
         >
           Save
@@ -78,7 +78,7 @@ const FormikApp = withFormik({
       image: ""
     };
   },
-  handleSubmit(values, { resetForm, setErrors, setSubmitting, props }) {
+  handleSubmit(values, { setSubmitting, props }) {
     const { logInUser, user, changeImage } = props;
 
     const formdata = new FormData();
@@ -104,7 +104,7 @@ const FormikApp = withFormik({
         setSubmitting(false);
       });
   }
-})(ChangePhotoForm);
+})(ChangeImageForm);
 
 const mapStateToProps = state => {
   return {

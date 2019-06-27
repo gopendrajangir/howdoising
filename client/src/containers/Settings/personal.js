@@ -4,21 +4,26 @@ import { withRouter } from "react-router-dom";
 import UserImage from "assets/images/user.jpg";
 import SvgSprite from "assets/images/sprite.svg";
 import ChangeProfileModal from "components/Settings/changeProfileModal";
-import ChangeProfilePhoto from "./changeProfilePhoto";
+import ChangeProfileImage from "./changeProfileImage";
+import ConfirmImagePrivacy from "./confirmImagePrivacy";
+import ChangeDisplayName from "./changeDisplayName";
 
 class PersonalInfo extends React.Component {
   constructor(props) {
     super(props);
-    const { image } = this.props.user;
+    const { image, privacy } = this.props.user;
     this.state = {
       user: null,
       error: null,
-      current: 0,
+      current: null,
       change: false,
-      imageId: image.$id
+      imageId: image.$id,
+      imagePrivacy: privacy.image
     };
 
     this.changeCurrentModal = this.changeCurrentModal.bind(this);
+    this.privacyChangeHandler = this.privacyChangeHandler.bind(this);
+    this.cancelPrivacyChange = this.cancelPrivacyChange.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.changeImage = this.changeImage.bind(this);
   }
@@ -29,6 +34,25 @@ class PersonalInfo extends React.Component {
       change: false,
       current: 0
     });
+  }
+
+  privacyChangeHandler(event) {
+    this.setState({
+      change: true,
+      current: "imagePrivacy",
+      imagePrivacy: event.target.value
+    });
+  }
+
+  cancelPrivacyChange() {
+    return () => {
+      const { imagePrivacy: imgPrivacy } = this.state;
+      this.setState({
+        change: false,
+        current: 0,
+        imagePrivacy: imgPrivacy === "Public" ? "Private" : "Public"
+      });
+    };
   }
 
   changeCurrentModal(current) {
@@ -43,7 +67,7 @@ class PersonalInfo extends React.Component {
   closeModal() {
     this.setState({
       change: false,
-      current: 0
+      current: null
     });
   }
 
@@ -81,7 +105,7 @@ class PersonalInfo extends React.Component {
   }
 
   render() {
-    const { user, error, change, current, imageId } = this.state;
+    const { user, error, change, current, imageId, imagePrivacy } = this.state;
 
     return (
       <div className="private-profile-container">
@@ -89,9 +113,9 @@ class PersonalInfo extends React.Component {
           {error}
           {user && (
             <div className="private-profile-details">
-              <div className="private-profile-details-photo">
-                <div className="private-profile-details-photo-content">
-                  <div className="private-profile-details-photo-content-image">
+              <div className="private-profile-details-image">
+                <div className="private-profile-details-image-content">
+                  <div className="private-profile-details-image-content-image">
                     <img
                       src={`/apis/images/${imageId}`}
                       alt="user"
@@ -101,30 +125,31 @@ class PersonalInfo extends React.Component {
                     />
                   </div>
                 </div>
-                <div className="private-profile-details-photo-edit">
+                <div className="private-profile-details-image-edit">
                   <button
                     type="button"
-                    className="private-profile-details-photo-edit-button"
-                    onClick={this.changeCurrentModal(1)}
+                    className="private-profile-details-image-edit-button"
+                    onClick={this.changeCurrentModal("imageEdit")}
                   >
-                    <span className="private-profile-details-photo-edit-button-icon">
+                    <span className="private-profile-details-image-edit-button-icon">
                       <svg>
                         <use xlinkHref={`${SvgSprite}#icon-pencil`} />
                       </svg>
                     </span>
                   </button>
                 </div>
-                <div className="private-profile-details-photo-privacy">
-                  <select name="privacy" id="profile-photo-privacy">
-                    <option value={user.privacy.image}>
-                      {user.privacy.image}
-                    </option>
+                <div className="private-profile-details-image-privacy">
+                  <select
+                    name="privacy"
+                    id="profile-image-privacy"
+                    onChange={this.privacyChangeHandler}
+                    value={imagePrivacy}
+                  >
+                    <option value={imagePrivacy}>{imagePrivacy}</option>
                     <option
-                      value={
-                        user.privacy.image === "Public" ? "Private" : "Public"
-                      }
+                      value={imagePrivacy === "Public" ? "Private" : "Public"}
                     >
-                      {user.privacy.image === "Public" ? "Private" : "Public"}
+                      {imagePrivacy === "Public" ? "Private" : "Public"}
                     </option>
                   </select>
                 </div>
@@ -140,7 +165,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-name-edit-button"
-                    onClick={this.changeCurrentModal(2)}
+                    onClick={this.changeCurrentModal("nameEdit")}
                   >
                     <span className="private-profile-details-name-edit-button-icon">
                       <svg>
@@ -159,7 +184,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-email-edit-button"
-                    onClick={this.changeCurrentModal(3)}
+                    onClick={this.changeCurrentModal("emailEdit")}
                   >
                     <span className="private-profile-details-email-edit-button-icon">
                       <svg>
@@ -178,7 +203,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-level-edit-button"
-                    onClick={this.changeCurrentModal(4)}
+                    onClick={this.changeCurrentModal("levelEdit")}
                   >
                     <span className="private-profile-details-level-edit-button-icon">
                       <svg>
@@ -193,7 +218,7 @@ class PersonalInfo extends React.Component {
                 <div className="private-profile-details-style-value">
                   {user.style.map((st, index) => {
                     return (
-                      <span>
+                      <span key={st}>
                         {st}
                         {index !== user.style.length - 1 ? "," : ""}&nbsp;&nbsp;
                       </span>
@@ -204,7 +229,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-style-edit-button"
-                    onClick={this.changeCurrentModal(5)}
+                    onClick={this.changeCurrentModal("styleEdit")}
                   >
                     <span className="private-profile-details-style-edit-button-icon">
                       <svg>
@@ -216,11 +241,23 @@ class PersonalInfo extends React.Component {
               </div>
               {change ? (
                 <ChangeProfileModal>
-                  {current === 1 ? (
-                    <ChangeProfilePhoto
+                  {current === "imageEdit" ? (
+                    <ChangeProfileImage
                       closeModal={this.closeModal}
                       imageId={imageId}
                       changeImage={this.changeImage}
+                    />
+                  ) : current === "imagePrivacy" ? (
+                    <ConfirmImagePrivacy
+                      cancelPrivacyChange={this.cancelPrivacyChange}
+                      imagePrivacy={imagePrivacy}
+                      emailPrivacy={user.privacy.email}
+                      closeModal={this.closeModal}
+                    />
+                  ) : current === "nameEdit" ? (
+                    <ChangeDisplayName
+                      closeModal={this.closeModal}
+                      displayname={user.displayname}
                     />
                   ) : null}
                 </ChangeProfileModal>

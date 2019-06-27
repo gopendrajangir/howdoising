@@ -4,8 +4,9 @@ exports.logout = require('./users/logout');
 exports.sessions = require('./users/sessions');
 exports.sessionLogout = require('./users/sessionLogout');
 exports.privateProfile = require('./users/privateProfile');
+exports.changePrivacy = require('./users/changePrivacy');
 
 exports.connector = require('./connector');
 
 exports.getImage = require('./images/getImage');
-exports.updateImage = require('./images/updateImage');
+exports.changeImage = require('./images/changeImage');

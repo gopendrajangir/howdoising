@@ -5,6 +5,6 @@ const protectedRouteMiddleware = require('../../middlewares/authMiddleware').pro
 
 router.route('/:id')
   .get(controllers.getImage)
-  .post(protectedRouteMiddleware, uploadImage.single('image'), controllers.updateImage);
+  .post(protectedRouteMiddleware, uploadImage.single('image'), controllers.changeImage);
 
 module.exports = router;

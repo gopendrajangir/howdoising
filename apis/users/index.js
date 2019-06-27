@@ -20,6 +20,9 @@ router.route('/sessions')
 router.route('/private/profile/:id')
   .get(protectedRouteMiddleware, controllers.privateProfile);
 
+router.route('/private/profile/privacy')
+  .post(protectedRouteMiddleware, controllers.changePrivacy);
+
 router.route('/session/logout/:id')
   .get(protectedRouteMiddleware, controllers.sessionLogout);
 

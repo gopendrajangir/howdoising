@@ -1,5 +1,5 @@
-const User = require('./../../models/User');
-const deleteImageById = require('./../../utils/deleteImageById');
+const User = require('../../models/User');
+const deleteImageById = require('../../utils/deleteImageById');
 
 module.exports = (req, res) => {
   
