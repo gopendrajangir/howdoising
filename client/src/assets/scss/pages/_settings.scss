@@ -2,26 +2,50 @@
   width: 100%;
   
   .settings {
+      
+    @include respond(tab-port) {
+      @include flexColumnCenter;
+      justify-content: flex-start;
+    }
+
     @include flexRowCenter;
     background-color: $color-white;
     height: 45rem;
     
     & > * {
       padding-top: 2rem;
+      @include respond(tab-port) {
+        padding-top: 0rem;
+      }
     }
 
     &-navigation {
+      @include respond(tab-port) {
+        width: 100%;
+        height: 5rem;
+      }
       width: 28rem;
       height: 100%;
-
+      
       &-links {
         @include flexColumnCenter;
         justify-content: flex-start;
         width: 100%;
         height: 100%;
         padding: 0rem;
-
+        
+        @include respond(tab-port) {
+          flex-direction: row;          
+          justify-content: flex-start;
+          align-items: stretch;
+        }
+        
         &-link {
+          @include respond(tab-port) {
+            width: 30rem;
+            height: 100%;
+          }
+
           @include flexRowCenter;
           font-size: 1.8rem;
           height: 4.6rem;
@@ -30,7 +54,7 @@
           &-selected {
             background-color: rgba($color-blue-dark-1, 0.1) !important;
             color: $color-blue-dark-1 !important;
-            
+          
             svg {
               fill: $color-blue-dark-1 !important;
             }
@@ -50,6 +74,13 @@
             border-top-right-radius: 5rem;
             border-bottom-right-radius: 5rem;
             text-decoration: none;
+
+            @include respond(tab-port) {
+              border-top-right-radius: 0rem;
+              border-bottom-right-radius: 0rem;
+              justify-content: center;
+              padding-left: 0rem;
+            }
             
             &:hover {
               background-color: $color-white-2;
@@ -78,6 +109,10 @@
       flex: 1;
       height: 100%;
       padding-left: 4rem;
+
+      @include respond(tab-port) {
+        padding-top: 3rem;
+      }
 
       &-content {
         @include flexColumnCenter;
@@ -188,8 +223,9 @@
                 
               &-options {
                 @include flexColumnCenter;
-
+                
                 button {
+                  margin-left: 2rem;
                   cursor: pointer;
                   @include defaultInput;
                   background-color: $color-red;
@@ -221,6 +257,12 @@
             width: 100%;
             @include flexRowCenter;
             &-details {
+
+              @include respond(tab-port) {
+                width: 100%;
+              }
+              overflow: hidden;
+              position: relative;
               width: 60%;
               border: 1px solid $color-white-3;
               border-radius: 1rem;

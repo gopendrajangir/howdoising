@@ -22,6 +22,7 @@ export default class Sessions extends React.Component {
       error: null
     };
     this.removeSession = this.removeSession.bind(this);
+    this.sessionDropDownHandler = this.sessionDropDownHandler.bind(this);
   }
 
   fetchSessions() {
@@ -84,28 +85,22 @@ export default class Sessions extends React.Component {
     this.fetchSessions();
   }
 
-  componentDidUpdate() {
-    (() => {
-      const inputs = $("#dropdown-input");
-      const sessions = $(".sessions-session");
-      inputs.map((index, input) => {
-        $(input).change(function() {
-          console.log($(this));
-          if ($(this).is(":checked")) {
-            $(sessions[index]).css({
-              padding: "2rem 2.3rem",
-              height: "16rem"
-            });
-          } else {
-            $(sessions[index]).css({
-              paddingBottom: "0.7rem",
-              height: "6rem"
-            });
-          }
+  sessionDropDownHandler() {
+    return event => {
+      const $session = $(event.target).closest(".sessions-session");
+      const $input = $(event.target);
+      if ($input.is(":checked")) {
+        $session.css({
+          padding: "2rem 2.3rem",
+          height: "16rem"
         });
-        return true;
-      });
-    })();
+      } else {
+        $session.css({
+          paddingBottom: "0.7rem",
+          height: "6rem"
+        });
+      }
+    };
   }
 
   render() {
@@ -171,8 +166,13 @@ export default class Sessions extends React.Component {
                         </span>
                       ) : null}
                       <span className="sessions-session-details-device-dropdown-icon">
-                        <input hidden type="checkbox" id="dropdown-input" />
-                        <label htmlFor="dropdown-input">
+                        <input
+                          onChange={this.sessionDropDownHandler()}
+                          hidden
+                          type="checkbox"
+                          id={`dropdown-input-${session.oid}`}
+                        />
+                        <label htmlFor={`dropdown-input-${session.oid}`}>
                           <svg>
                             <use
                               xlinkHref={`${SvgSprite}#icon-cheveron-down`}

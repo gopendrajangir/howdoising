@@ -5,10 +5,6 @@ const User = require('./../../models/User');
 const validateRegisterInput = require('./../../validation/register');
 const deleteImageById = require('./../../utils/deleteImageById');
 
-const gfs = require('./../../config/gfs');
-
-gfs.collection('images');
-
 module.exports = (req, res) => {
 
   const data = req.body;
@@ -49,14 +45,14 @@ module.exports = (req, res) => {
           if(err) {
             console.log("Error in findOne at register route", err);
             if(req.file) {
-              deleteImageById(gfs, req.file.id);
+              deleteImageById(req.file.id);
             }
             return res.status(500).send("Internal Server Error");        
           }
           
           if(user) {
             if(req.file) {
-              deleteImageById(gfs, req.file.id);
+              deleteImageById(req.file.id);
             }
             return res.status(409).json({
               errors: {
@@ -76,7 +72,7 @@ module.exports = (req, res) => {
             if(err) {
               console.log("Error in new user save at register route", err);
               if(req.file) {
-                deleteImageById(gfs, req.file.id);
+                deleteImageById(req.file.id);
               }
               return res.status(500).send("Internal Server Error");
             }
@@ -115,7 +111,7 @@ module.exports = (req, res) => {
     });
   } else {
     if(req.file) {
-      deleteImageById(gfs, req.file.id);
+      deleteImageById(req.file.id);
     }
     res.status(422).json({ errors });
   }

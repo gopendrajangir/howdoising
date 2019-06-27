@@ -3,14 +3,48 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import UserImage from "assets/images/user.jpg";
 import SvgSprite from "assets/images/sprite.svg";
+import ChangeProfileModal from "components/Settings/changeProfileModal";
+import ChangeProfilePhoto from "./changeProfilePhoto";
 
 class PersonalInfo extends React.Component {
   constructor(props) {
     super(props);
+    const { image } = this.props.user;
     this.state = {
       user: null,
-      error: null
+      error: null,
+      current: 0,
+      change: false,
+      imageId: image.$id
     };
+
+    this.changeCurrentModal = this.changeCurrentModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.changeImage = this.changeImage.bind(this);
+  }
+
+  changeImage(id) {
+    this.setState({
+      imageId: id,
+      change: false,
+      current: 0
+    });
+  }
+
+  changeCurrentModal(current) {
+    return () => {
+      this.setState({
+        change: true,
+        current
+      });
+    };
+  }
+
+  closeModal() {
+    this.setState({
+      change: false,
+      current: 0
+    });
   }
 
   fetchUserDetails() {
@@ -47,7 +81,7 @@ class PersonalInfo extends React.Component {
   }
 
   render() {
-    const { user, error } = this.state;
+    const { user, error, change, current, imageId } = this.state;
 
     return (
       <div className="private-profile-container">
@@ -59,7 +93,7 @@ class PersonalInfo extends React.Component {
                 <div className="private-profile-details-photo-content">
                   <div className="private-profile-details-photo-content-image">
                     <img
-                      src={`/apis/images/${user.image.$id}`}
+                      src={`/apis/images/${imageId}`}
                       alt="user"
                       onError={event => {
                         event.target.src = UserImage;
@@ -71,6 +105,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-photo-edit-button"
+                    onClick={this.changeCurrentModal(1)}
                   >
                     <span className="private-profile-details-photo-edit-button-icon">
                       <svg>
@@ -95,7 +130,9 @@ class PersonalInfo extends React.Component {
                 </div>
               </div>
               <div className="private-profile-details-name">
-                <div className="private-profile-details-name-title">Display Name</div>
+                <div className="private-profile-details-name-title">
+                  Display Name
+                </div>
                 <div className="private-profile-details-name-value">
                   {user.displayname}
                 </div>
@@ -103,6 +140,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-name-edit-button"
+                    onClick={this.changeCurrentModal(2)}
                   >
                     <span className="private-profile-details-name-edit-button-icon">
                       <svg>
@@ -121,6 +159,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-email-edit-button"
+                    onClick={this.changeCurrentModal(3)}
                   >
                     <span className="private-profile-details-email-edit-button-icon">
                       <svg>
@@ -139,6 +178,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-level-edit-button"
+                    onClick={this.changeCurrentModal(4)}
                   >
                     <span className="private-profile-details-level-edit-button-icon">
                       <svg>
@@ -164,6 +204,7 @@ class PersonalInfo extends React.Component {
                   <button
                     type="button"
                     className="private-profile-details-style-edit-button"
+                    onClick={this.changeCurrentModal(5)}
                   >
                     <span className="private-profile-details-style-edit-button-icon">
                       <svg>
@@ -173,6 +214,17 @@ class PersonalInfo extends React.Component {
                   </button>
                 </div>
               </div>
+              {change ? (
+                <ChangeProfileModal>
+                  {current === 1 ? (
+                    <ChangeProfilePhoto
+                      closeModal={this.closeModal}
+                      imageId={imageId}
+                      changeImage={this.changeImage}
+                    />
+                  ) : null}
+                </ChangeProfileModal>
+              ) : null}
             </div>
           )}
         </div>

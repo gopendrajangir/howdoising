@@ -1,0 +1,113 @@
+.private-profile-details-change {
+  position: absolute;
+  top: 0rem;
+  height: 0rem;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-white, 1);
+  
+  
+  .change-form-photo {
+    @include flexColumnCenter;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+    &-pic {
+      padding-top: 3rem;
+
+      &-wrapper {
+        @include flexRowCenter;
+        width: 25rem;
+        height: 25rem;
+        border-radius: 50%;
+        box-shadow: 0rem 0rem 1rem $color-white-3;
+        border: 1px solid $color-grey-light-1;
+        overflow: hidden;
+
+        label.choose-photo {
+          position: relative;
+          width: 25rem;
+          height: 25rem;
+          border-radius: 50%;
+          overflow: hidden;
+          
+          @include flexRowCenter;
+  
+          img {
+            height: 100%;
+          }
+
+          &-cover {
+            @include flexRowCenter;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: .4s;
+            cursor: pointer;
+            color: $color-white;
+            text-align: center;
+            background-color: rgba($color-white, 0.5);
+            
+            svg {
+              @include flexRowCenter;
+              width: 5rem;
+              height: 5rem;
+              fill: $color-blue-light-3;
+            }
+
+            &:hover {
+              background-color: rgba($color-white, 0.8);
+              color: $color-grey-dark-1;
+              width: 102%;
+              height: 102%;
+            }
+          }
+        }
+      }
+    }
+
+    &-footer {
+      width: 100%;
+      padding: 3rem;
+      @include flexRowCenter;
+      justify-content: flex-end;
+  
+      button {
+        @include flexRowCenter;
+        @include defaultInput;
+        color: white;
+        padding: 1.1rem 1.1rem;
+        font-weight: 600;
+        letter-spacing: .7px;
+        width: 9rem;
+        border-radius: .5rem;
+        margin-left: 3rem;
+        cursor: pointer;
+        transition: .3s;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 4px $color-grey-light-2;
+        
+        &:active {
+          transform: translateY(0px);
+          box-shadow: 0 0 0 $color-grey-light-2;
+        }
+        
+        &[disabled=disabled], &:disabled {
+          transform: translateY(0px);
+          box-shadow: 0 0 0 $color-grey-light-2;
+          background-color: rgba($color-blue-light-3, 0.7);
+        }
+      }
+  
+      &-button-cancel {
+        background-color: $color-red;
+      }
+  
+      &-button-save {
+        background-color: $color-blue-light-3;
+      }
+    }
+  }
+}

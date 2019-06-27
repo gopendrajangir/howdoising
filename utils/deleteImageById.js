@@ -1,8 +1,10 @@
+const mongoose = require('mongoose');
+const imageBucket = require('./../config/gfs').imageBucket;
 
-module.exports = (gfs, id) => {
-  gfs.remove({ _id: id }, (err, gridStore) => {
+module.exports = (id) => {
+  imageBucket.delete(mongoose.Types.ObjectId(id), (err) => {
     if(err) {
-      console.log(err);
+      return console.log(err);
     }
   });
 }

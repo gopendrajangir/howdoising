@@ -4,10 +4,6 @@ const crypto = require('crypto');
 const mongoURI = require('../config/keys').mongoURI;
 const path = require('path');
 
-const gfs = require('./../config/gfs');
-
-gfs.collection('images');
-
 const imageStorage = new GridFSStorage({
   url:  mongoURI,
   file: (req, file) => {

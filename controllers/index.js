@@ -8,3 +8,4 @@ exports.privateProfile = require('./users/privateProfile');
 exports.connector = require('./connector');
 
 exports.getImage = require('./images/getImage');
+exports.updateImage = require('./images/updateImage');
