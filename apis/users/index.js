@@ -23,6 +23,21 @@ router.route('/private/profile/:id')
 router.route('/private/profile/privacy')
   .post(protectedRouteMiddleware, controllers.changePrivacy);
 
+router.route('/private/profile/displayname')
+  .post(protectedRouteMiddleware, controllers.changeDisplayName);
+
+router.route('/private/profile/verify')
+  .post(protectedRouteMiddleware, controllers.verifyAccountByEmail);
+
+router.route('/verifyAccount')
+  .get(protectedRouteMiddleware, controllers.sendVerifyAccountMail);
+  
+router.route('/verifyAccount')
+  .get(protectedRouteMiddleware, controllers.sendVerifyAccountMail);
+
+router.route('/verifyAccount/:token')
+  .get(protectedRouteMiddleware, controllers.verifyAccountWithToken);
+
 router.route('/session/logout/:id')
   .get(protectedRouteMiddleware, controllers.sessionLogout);
 

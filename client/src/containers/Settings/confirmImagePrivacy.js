@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { logIn } from "actions/auth";
+import $ from "jquery";
 
 class ConfirmImagePrivacy extends React.Component {
   constructor(props) {
@@ -9,39 +10,44 @@ class ConfirmImagePrivacy extends React.Component {
   }
 
   changePrivacy(imagePrivacy, emailPrivacy) {
-    const { logInUser, closeModal } = this.props;
-    return () => {
-      const jsonBody = JSON.stringify({
-        image: imagePrivacy,
-        email: emailPrivacy
-      });
-
-      window
-        .fetch("/apis/users/private/profile/privacy", {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: jsonBody
-        })
-        .then(results => {
-          if (results.status === 500) {
-            throw Error("Internal Server Error");
-          }
-          return results.json();
-        })
-        .then(data => {
-          if (data.msg) {
-            console.log(data.msg);
-          } else {
-            closeModal();
-            logInUser(data.user);
-          }
-        })
-        .catch(err => {
-          console.log(err.message);
+    return event => {
+      $(event.target).prop("disabled", true);
+      const { logInUser, closeModal } = this.props;
+      return () => {
+        const jsonBody = JSON.stringify({
+          image: imagePrivacy,
+          email: emailPrivacy
         });
+
+        window
+          .fetch("/apis/users/private/profile/privacy", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: jsonBody
+          })
+          .then(results => {
+            if (results.status === 500) {
+              throw Error("Internal Server Error");
+            }
+            return results.json();
+          })
+          .then(data => {
+            if (data.msg) {
+              console.log(data.msg);
+              $(event.target).prop("disabled", false);
+            } else {
+              closeModal();
+              logInUser(data.user);
+            }
+          })
+          .catch(err => {
+            $(event.target).prop("disabled", false);
+            console.log(err.message);
+          });
+      };
     };
   }
 

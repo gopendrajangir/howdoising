@@ -31,3 +31,13 @@ exports.protectedRouteMiddleware = (req, res, next) => {
     });
   }
 }
+
+exports.verifiedProtectedRouteMiddleware = (req, res, next) => {
+  if(req.user && req.user.uid && req.user.isVerified) {
+    next();
+  } else {
+    return res.status(403).json({
+      msg: "Unathorized user"
+    });
+  }
+}

@@ -7,11 +7,12 @@
 @import "base/typography";
 @import "base/utilities";
 
+@import "components/accountVerifyNotification";
 @import "components/buttons";
+@import "components/changeProfileModal";
 @import "components/headings";
 @import "components/login";
 @import "components/signup";
-@import "components/changeProfileModal";
 
 @import "layout/modal";
 @import "layout/navigation";

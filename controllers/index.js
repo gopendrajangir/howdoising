@@ -5,6 +5,10 @@ exports.sessions = require('./users/sessions');
 exports.sessionLogout = require('./users/sessionLogout');
 exports.privateProfile = require('./users/privateProfile');
 exports.changePrivacy = require('./users/changePrivacy');
+exports.changeDisplayName = require('./users/changeDisplayName');
+exports.sendVerifyAccountMail = require('./users/sendVerifyAccountMail');
+exports.verifyAccountWithToken = require('./users/verifyAccountWithToken');
+exports.verifyAccountByEmail = require('./users/verifyAccountByEmail');
 
 exports.connector = require('./connector');
 

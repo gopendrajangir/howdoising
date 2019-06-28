@@ -21,6 +21,7 @@ module.exports = (req, res) => {
 
       const sessionUser = {
         uid: user._id,
+        isVerified: false,
         platform: ua.platform,
         os: ua.os,
         devices: {

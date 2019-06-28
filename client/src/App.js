@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Navigation from "containers/Navigation";
 import Logout from "containers/Logout";
+import AccountVerifyNotification from "containers/AccountVerifyNotification";
 
 import Home from "components/Home";
 import Signup from "components/Signup";
@@ -16,6 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app-container">
+        <AccountVerifyNotification />
         <Navigation />
         <Switch>
           <Route path="/" exact component={Home} />

@@ -21,6 +21,8 @@ module.exports = (req, res) => {
     data.image = null;
   }
 
+  data.isVerified = false;
+
   const { isValid, errors } = validateRegisterInput(data);
   
   if(isValid) {
@@ -51,14 +53,16 @@ module.exports = (req, res) => {
           }
           
           if(user) {
-            if(req.file) {
-              deleteImageById(req.file.id);
-            }
-            return res.status(409).json({
-              errors: {
-                email: "Email already registered"
+            if(user.isVerified) {
+              if(req.file) {
+                deleteImageById(req.file.id);
               }
-            });
+              return res.status(409).json({
+                errors: {
+                  email: "Email already registered"
+                }
+              });
+            }
           }
           
           data.privacy = {
@@ -84,6 +88,7 @@ module.exports = (req, res) => {
 
             const sessionUser = {
               uid: user._id,
+              isVerified: false,
               platform: ua.platform,
               os: ua.os,
               devices: {
@@ -103,7 +108,13 @@ module.exports = (req, res) => {
                 console.log("Error in req login at register route", err);
                 return res.status(500).send("Internal Server Error");
               }
-              res.status(200).json({ user });
+
+              req.session.registerRedirect = {
+                isRedirected: true,
+                user
+              }
+              
+              res.redirect('/apis/users/verifyAccount');
             });
           });
         });

@@ -8,6 +8,16 @@ const UserSchema = new Schema({
     index: true,
     unique: true
   },
+  isVerified: {
+    type: Boolean,
+    required: true
+  },
+  accountVerificationToken: {
+    type: Schema.Types.Mixed
+  },
+  resetPasswordToken: {
+    type: Schema.Types.Mixed
+  },
   displayname: {
     type: String,
     required: true

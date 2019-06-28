@@ -1,0 +1,25 @@
+.account-verify-notification {
+  width: 100%;
+  @include flexRowCenter;
+  background-color: $color-blue-light-1;
+  padding: 1rem 5rem;
+
+  &-message {
+    font-size: 1.8rem;
+    color: white;
+  }
+
+  &-button-resend {
+    @include defaultInput;
+    padding: 1rem 2rem;
+    color: white;
+    background-color: $color-blue-dark-3;
+    border: 2px solid $color-white;
+    font-weight: 600;
+    cursor: pointer;
+
+    &[disabled=disabled], &:disabled {
+      background-color: $color-grey-light-1;
+    }
+  }
+}

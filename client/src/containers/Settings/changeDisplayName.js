@@ -57,15 +57,16 @@ const FormikApp = withFormik({
 
     const { displayname } = values;
 
-    const formdata = new FormData();
-
-    formdata.append("displayname", displayname);
+    const jsonBody = JSON.stringify({ displayname });
 
     window
       .fetch("/apis/users/private/profile/displayname", {
         credentials: "include",
         method: "POST",
-        body: formdata
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: jsonBody
       })
       .then(results => {
         if (results.status === 500) throw Error("Internal Server Error");
@@ -79,9 +80,7 @@ const FormikApp = withFormik({
         } else {
           closeModal();
           logInUser(data.user);
-          resetForm();
         }
-        setSubmitting(false);
       })
       .catch(err => {
         console.log(err.message);

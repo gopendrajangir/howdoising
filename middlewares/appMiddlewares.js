@@ -12,8 +12,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 const express = require('express');
 
-const useragent = require('express-useragent');
-
 const mongooseStore = new MS({
   modelName: 'session'
 });

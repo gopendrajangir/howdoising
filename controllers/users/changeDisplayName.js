@@ -6,15 +6,12 @@ module.exports = (req, res) => {
  
   const uid = req.user.uid;
   
-  const privacy = {};
+  const displayname = req.body.displayname;
 
-  privacy.image = req.body.image;
-  privacy.email = req.body.email;
-
-  User.findOneAndUpdate({ _id: ObjectId(uid)}, { $set : { privacy }}, (err, user) => {
+  User.findOneAndUpdate({ _id: ObjectId(uid) }, { $set : { displayname }}, {new: true}, (err, user) => {
   
     if(err) {
-      console.log("Error in user find one at change privacy", err);
+      console.log("Error in user find one at change display name route", err);
       return res.status(500).send("Internal Server Error");
     }
 
@@ -23,7 +20,9 @@ module.exports = (req, res) => {
     }
 
     delete user.password;
-    
+    delete user.accountVerificationToken;
+    delete user.resetPasswordToken;
+
     res.status(200).json({ user });
   });
 }
