@@ -7,7 +7,7 @@ import PersonalInfo from "./personal";
 import SvgSprite from "assets/images/sprite.svg";
 
 class Settings extends React.Component {
-  componentDidMout() {
+  componentDzidMout() {
     const { history, isLoggedIn } = this.props;
     if (!isLoggedIn) {
       history.push("/login");
