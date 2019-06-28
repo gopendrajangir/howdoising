@@ -8,7 +8,7 @@ module.exports = (req, res) => {
     return res.status(422).json({ errors: { email: "Invalid Email"} });
   }
 
-  User.findOne({ email: email }, (err, user) => {
+  User.findOne({ email }, (err, user) => {
 
     if(err) {
       console.log("Error in findOne at private profile verify route", err);

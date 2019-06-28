@@ -11,8 +11,11 @@ module.exports = (req, res) => {
   privacy.image = req.body.image;
   privacy.email = req.body.email;
 
+  
   User.findOneAndUpdate({ _id: ObjectId(uid)}, { $set : { privacy }}, (err, user) => {
   
+    console.log(user);
+
     if(err) {
       console.log("Error in user find one at change privacy", err);
       return res.status(500).send("Internal Server Error");

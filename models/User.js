@@ -13,10 +13,12 @@ const UserSchema = new Schema({
     required: true
   },
   accountVerificationToken: {
-    type: Schema.Types.Mixed
+    type: Schema.Types.Mixed,
+    required: true
   },
   resetPasswordToken: {
-    type: Schema.Types.Mixed
+    type: Schema.Types.Mixed,
+    required: true
   },
   displayname: {
     type: String,

@@ -70,6 +70,16 @@ module.exports = (req, res) => {
             image: "Public"
           };
 
+          data.accountVerificationToken = {
+            token: null,
+            maxTime: 0
+          }
+
+          data.resetPasswordToken = {
+            token: null,
+            maxTime: 0
+          }
+
           const newUser = new User(data);
 
           newUser.save((err, user) => {

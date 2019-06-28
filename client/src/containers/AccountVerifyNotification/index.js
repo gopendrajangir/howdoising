@@ -52,12 +52,12 @@ class AccountVerifyNotification extends React.Component {
   render() {
     const { isLoggedIn, user } = this.props;
     return (
-      <div className="account-verify-notification">
+      <React.Fragment>
         {!isLoggedIn
           ? null
           : user &&
             !user.isVerified && (
-              <React.Fragment>
+              <div className="account-verify-notification">
                 <p className="account-verify-notification-message">
                   Email you provided for your account is not verified yet.
                   Please click on the email verification link sent to registered
@@ -71,9 +71,9 @@ class AccountVerifyNotification extends React.Component {
                 >
                   Resend
                 </button>
-              </React.Fragment>
+              </div>
             )}
-      </div>
+      </React.Fragment>
     );
   }
 }

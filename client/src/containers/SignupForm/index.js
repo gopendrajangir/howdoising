@@ -273,6 +273,7 @@ const FormikApp = withFormik({
         return results.json();
       })
       .then(data => {
+        console.log(data);
         if (data.errors) {
           setErrors({
             email: data.errors.email || "",

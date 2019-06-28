@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navigation from "containers/Navigation";
 import Logout from "containers/Logout";
 import AccountVerifyNotification from "containers/AccountVerifyNotification";
+import VerifyAccount from "containers/VerifyAccount";
 
 import Home from "components/Home";
 import Signup from "components/Signup";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/settings/personal" exact component={Settings} />
           <Route path="/settings/security" exact component={Settings} />
           <Route path="/auditorium" exact component={Auditorium} />
+          <Route path="/verify" exact component={VerifyAccount} />
           <Route path="/logout" exact component={Logout} />
         </Switch>
       </div>

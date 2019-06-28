@@ -32,9 +32,6 @@ router.route('/private/profile/verify')
 router.route('/verifyAccount')
   .get(protectedRouteMiddleware, controllers.sendVerifyAccountMail);
   
-router.route('/verifyAccount')
-  .get(protectedRouteMiddleware, controllers.sendVerifyAccountMail);
-
 router.route('/verifyAccount/:token')
   .get(protectedRouteMiddleware, controllers.verifyAccountWithToken);
 
