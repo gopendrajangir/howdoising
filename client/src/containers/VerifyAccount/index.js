@@ -1,6 +1,6 @@
-import React from "containers/VerifyAccount/node_modules/react";
-import { logIn } from "containers/VerifyAccount/node_modules/actions/auth";
-import { connect } from "containers/VerifyAccount/node_modules/react-redux";
+import React from "react";
+import { logIn } from "actions/auth";
+import { connect } from "react-redux";
 
 class VerifyAccount extends React.Component {
   componentDidMount() {
