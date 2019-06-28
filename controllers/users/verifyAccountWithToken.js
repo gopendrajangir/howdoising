@@ -43,7 +43,7 @@ module.exports = (req, res) => {
             delete user.resetPasswordToken;
             delete user.resetPasswordToken;
 
-            res.status(200).json({ user });
+            res.redirect('/profile');
           });
         });
       }
