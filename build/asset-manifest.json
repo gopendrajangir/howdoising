@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/howdoising/static/css/main.7152b132.css",
+    "main.js": "/howdoising/static/js/main.c8f9b785.js",
+    "static/media/sprite.svg": "/howdoising/static/media/sprite.7fa41a8f60ab20a1b20e42db2dcd99cf.svg",
+    "static/media/user.png": "/howdoising/static/media/user.2fda6558cd58b877e14f.png",
+    "static/media/logo.svg": "/howdoising/static/media/logo.cbd93002500c8d169973976640144891.svg",
+    "index.html": "/howdoising/index.html",
+    "main.7152b132.css.map": "/howdoising/static/css/main.7152b132.css.map",
+    "main.c8f9b785.js.map": "/howdoising/static/js/main.c8f9b785.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7152b132.css",
+    "static/js/main.c8f9b785.js"
+  ]
+}

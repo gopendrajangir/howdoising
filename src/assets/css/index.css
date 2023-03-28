@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+img {
+  max-width: max-content;
+}
+
+body {
+  color: #444;
+}
+
+.page-section {
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  background-color: #fff;
+}
